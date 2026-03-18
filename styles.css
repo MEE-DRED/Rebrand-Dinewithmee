@@ -2738,3 +2738,583 @@ footer {
     padding: 20px 16px;
   }
 }
+
+/* ============ ABOUT + GUIDES (ADDITIVE) ============ */
+.health-score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.health-score-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.9;
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.resource-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(13,59,43,0.12);
+  box-shadow: var(--shadow-sm);
+  padding: 24px 22px;
+}
+
+.resource-card h3 {
+  color: var(--green-deep);
+  font-size: 1.24rem;
+  margin-bottom: 10px;
+}
+
+.resource-block {
+  margin-top: 14px;
+}
+
+.resource-block h4 {
+  color: var(--green-mid);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.resource-list {
+  display: grid;
+  gap: 6px;
+}
+
+.resource-list li {
+  position: relative;
+  padding-left: 16px;
+  color: var(--text-mid);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.resource-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.resource-link-row {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.resource-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(13,59,43,0.14);
+  background: var(--green-pale);
+  color: var(--green-deep);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.resource-note {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.trimester-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.trimester-card {
+  background: linear-gradient(160deg, rgba(255,255,255,0.98) 0%, rgba(249,246,240,0.96) 100%);
+  border: 1px solid rgba(201,151,58,0.26);
+  border-radius: var(--radius-md);
+  padding: 22px 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.trimester-card h3 {
+  color: var(--green-deep);
+  font-size: 1.14rem;
+  margin-bottom: 8px;
+}
+
+.trimester-needs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.trimester-needs span {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--green-deep);
+  background: rgba(232,245,239,0.9);
+  border: 1px solid rgba(20,90,62,0.14);
+}
+
+.signup-form-card {
+  max-width: 860px;
+}
+
+.about-dwm-section {
+  background:
+    linear-gradient(180deg, rgba(249,246,240,0.65) 0%, rgba(255,255,255,1) 85%),
+    radial-gradient(circle at 10% 10%, rgba(201,151,58,0.12) 0%, transparent 34%);
+}
+
+.about-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+
+.about-mini-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(13,59,43,0.12);
+  box-shadow: var(--shadow-sm);
+  padding: 20px 18px;
+  transition: var(--transition);
+}
+
+.about-mini-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.about-mini-card h3 {
+  color: var(--green-deep);
+  font-size: 1.12rem;
+  margin-bottom: 8px;
+}
+
+.about-preview {
+  color: var(--text-mid);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.about-toggle-btn,
+.guide-toggle-btn {
+  margin-top: 12px;
+  border: 1px solid rgba(13,59,43,0.14);
+  border-radius: 999px;
+  padding: 7px 14px;
+  background: var(--green-pale);
+  color: var(--green-deep);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.about-toggle-btn:hover,
+.guide-toggle-btn:hover {
+  border-color: rgba(201,151,58,0.54);
+  background: var(--gold-pale);
+}
+
+.about-more,
+.guide-more {
+  margin-top: 10px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.32s ease, opacity 0.28s ease;
+}
+
+.about-more p,
+.guide-more p {
+  color: var(--text-mid);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.guides-section {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(232,245,239,0.48) 100%),
+    radial-gradient(circle at 80% 10%, rgba(13,59,43,0.08) 0%, transparent 32%);
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+
+.guide-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(13,59,43,0.12);
+  box-shadow: var(--shadow-sm);
+  padding: 20px 18px;
+}
+
+.guide-card h3 {
+  color: var(--green-deep);
+  font-size: 1.08rem;
+  margin-bottom: 8px;
+}
+
+.guide-preview {
+  color: var(--text-mid);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.guide-more {
+  border-top: 1px solid rgba(13,59,43,0.1);
+  padding-top: 10px;
+}
+
+.guide-more strong {
+  color: var(--green-mid);
+}
+
+.guide-more a {
+  color: var(--green-light);
+  font-weight: 600;
+}
+
+/* ============ CHECKOUT MODAL (ADDITIVE) ============ */
+.checkout-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.checkout-modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.checkout-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
+
+.checkout-panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(1040px, calc(100% - 28px));
+  max-height: calc(100vh - 42px);
+  overflow: auto;
+  transform: translate(-50%, -46%);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(13,59,43,0.14);
+  box-shadow: var(--shadow-lg);
+  padding: 26px;
+  transition: transform 0.25s ease;
+}
+
+.checkout-modal.open .checkout-panel {
+  transform: translate(-50%, -50%);
+}
+
+.checkout-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(13,59,43,0.15);
+  background: var(--off-white);
+  color: var(--green-deep);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.checkout-header h3 {
+  color: var(--green-deep);
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.checkout-header p {
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+.checkout-layout {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: 18px;
+}
+
+.checkout-summary-block,
+.checkout-form-block {
+  border: 1px solid rgba(13,59,43,0.1);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(249,246,240,0.55) 100%);
+}
+
+.checkout-summary-block h4,
+.checkout-form-block h4 {
+  color: var(--green-deep);
+  font-size: 1.06rem;
+  margin-bottom: 12px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.checkout-items {
+  display: grid;
+  gap: 10px;
+}
+
+.checkout-item-row {
+  border: 1px solid rgba(13,59,43,0.1);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.checkout-item-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.checkout-item-name {
+  color: var(--green-deep);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.checkout-item-price {
+  color: var(--text-light);
+  font-size: 12px;
+}
+
+.checkout-qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkout-qty-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid rgba(13,59,43,0.2);
+  background: var(--white);
+  color: var(--green-deep);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.checkout-qty-value {
+  min-width: 22px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--green-deep);
+}
+
+.checkout-totals {
+  margin-top: 14px;
+  border-top: 1px dashed rgba(13,59,43,0.18);
+  padding-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.checkout-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-mid);
+}
+
+.checkout-total-row.grand {
+  font-size: 15px;
+  color: var(--green-deep);
+}
+
+.checkout-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.payment-options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.payment-option {
+  border: 1px solid rgba(13,59,43,0.16);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: var(--green-deep);
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--white);
+  transition: var(--transition);
+}
+
+.payment-option.active {
+  border-color: rgba(201,151,58,0.58);
+  background: var(--gold-pale);
+}
+
+.payment-option input {
+  accent-color: var(--green-mid);
+}
+
+.checkout-empty {
+  border: 1px dashed rgba(13,59,43,0.2);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+/* ============ MULTI-STEP SIGNUP (ADDITIVE) ============ */
+.signup-progress {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.signup-progress-step {
+  border: 1px solid rgba(13,59,43,0.14);
+  border-radius: 999px;
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  text-align: center;
+  background: var(--white);
+}
+
+.signup-progress-step.active {
+  color: var(--green-deep);
+  border-color: rgba(201,151,58,0.58);
+  background: var(--gold-pale);
+}
+
+.signup-progress-step.done {
+  color: var(--green-mid);
+  border-color: rgba(20,90,62,0.4);
+  background: var(--green-pale);
+}
+
+.signup-step {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.signup-step.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.checkbox-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.checkbox-chip {
+  border: 1px solid rgba(13,59,43,0.18);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--green-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  background: var(--white);
+}
+
+.checkbox-chip input {
+  accent-color: var(--green-mid);
+}
+
+.signup-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.btn-step {
+  border: 1px solid rgba(13,59,43,0.18);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--green-deep);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.btn-step.next {
+  border-color: rgba(201,151,58,0.62);
+  background: var(--gold-pale);
+}
+
+@media (max-width: 900px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-mini-grid,
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-panel {
+    padding: 20px 14px;
+  }
+
+  .checkout-fields-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .signup-progress {
+    grid-template-columns: 1fr;
+  }
+}

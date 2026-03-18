@@ -126,6 +126,7 @@ const HEALTH_GOAL_TAGS = {
   maternal: ['Pregnancy-friendly', 'High Iron', 'High Protein'],
   hbp: ['Heart-healthy', 'Low Carb', 'High Fiber'],
   weight: ['Weight-loss friendly', 'Low Carb', 'High Fiber'],
+  sickle: ['High Iron', 'High Protein', 'Heart-healthy'],
   general: ['Balanced diet', 'Heart-healthy', 'High Fiber', 'High Protein'],
 };
 
@@ -135,6 +136,7 @@ const HEALTH_GOAL_LABELS = {
   maternal: 'Support Pregnancy & Maternal Health',
   hbp: 'Reduce Blood Pressure (HBP)',
   weight: 'Weight Loss / Obesity',
+  sickle: 'Sickle Cell Support',
   general: 'General Healthy Eating',
 };
 
@@ -150,6 +152,15 @@ const HEALTH_TAG_BENEFITS = {
   'Balanced diet': 'provides balanced macro and micronutrients',
   'Energy-rich': 'provides sustained daily energy',
 };
+
+const RWF_PER_USD = 1400;
+
+function toRwf(amount, currency = 'RWF') {
+  const numericAmount = Number(amount || 0);
+  if (!Number.isFinite(numericAmount)) return 0;
+  if (currency === 'USD') return Math.round(numericAmount * RWF_PER_USD);
+  return Math.round(numericAmount);
+}
 
 function getMealHealthScore(meal) {
   const nutrition = meal.nutrition || {};
@@ -201,11 +212,8 @@ function getMealBenefitText(meal) {
   return `This meal ${reasons[0]} and ${reasons[1]}.`;
 }
 
-function formatPrice(amount, currency = 'USD') {
-  if (currency === 'RWF') {
-    return `${Math.round(amount).toLocaleString()} RWF`;
-  }
-  return `$${Number(amount).toFixed(2)}`;
+function formatPrice(amount, currency = 'RWF') {
+  return `${toRwf(amount, currency).toLocaleString()} RWF`;
 }
 
 const Favorites = {
@@ -260,22 +268,49 @@ function toggleFavoriteMeal(mealId) {
 // ── Cart System ──────────────────────────────
 const Cart = {
   get() {
-    return JSON.parse(localStorage.getItem('dwm_cart') || '[]');
+    let parsedItems;
+    try {
+      parsedItems = JSON.parse(localStorage.getItem('dwm_cart') || '[]');
+    } catch {
+      parsedItems = [];
+    }
+
+    if (!Array.isArray(parsedItems)) return [];
+
+    return parsedItems.map(item => ({
+      ...item,
+      price: toRwf(item.price, item.currency || 'RWF'),
+      currency: 'RWF',
+      qty: Math.max(1, Number(item.qty || 1)),
+    }));
   },
   save(items) {
-    localStorage.setItem('dwm_cart', JSON.stringify(items));
+    const normalizedItems = (Array.isArray(items) ? items : []).map(item => ({
+      ...item,
+      price: toRwf(item.price, item.currency || 'RWF'),
+      currency: 'RWF',
+      qty: Math.max(1, Number(item.qty || 1)),
+    }));
+
+    localStorage.setItem('dwm_cart', JSON.stringify(normalizedItems));
     Cart.updateCount();
   },
   add(item) {
+    const normalizedItem = {
+      ...item,
+      price: toRwf(item.price, item.currency || 'RWF'),
+      currency: 'RWF',
+    };
+
     const items = Cart.get();
-    const existing = items.find(i => i.id === item.id);
+    const existing = items.find(i => i.id === normalizedItem.id);
     if (existing) {
       existing.qty += 1;
     } else {
-      items.push({ ...item, qty: 1 });
+      items.push({ ...normalizedItem, qty: 1 });
     }
     Cart.save(items);
-    showToast(`${item.name} added to cart 🛒`);
+    showToast(`${normalizedItem.name} added to cart`);
   },
   remove(id) {
     const items = Cart.get().filter(i => i.id !== id);
@@ -292,17 +327,14 @@ const Cart = {
     Cart.save(items);
     Cart.renderSidebar();
   },
-  total(currency = 'USD') {
+  total(currency = 'RWF') {
     return Cart.get()
-      .filter(i => (i.currency || 'USD') === currency)
+      .filter(i => (i.currency || 'RWF') === currency)
       .reduce((sum, i) => sum + i.price * i.qty, 0);
   },
   totals() {
-    return Cart.get().reduce((map, item) => {
-      const currency = item.currency || 'USD';
-      map[currency] = (map[currency] || 0) + item.price * item.qty;
-      return map;
-    }, {});
+    const totalRwf = Cart.total('RWF');
+    return { RWF: totalRwf };
   },
   count() {
     return Cart.get().reduce((sum, i) => sum + i.qty, 0);
@@ -313,6 +345,11 @@ const Cart = {
       el.textContent = c;
       el.style.display = c > 0 ? 'flex' : 'none';
     });
+
+    const totalEl = document.getElementById('cart-total-amount');
+    if (totalEl) {
+      totalEl.textContent = formatPrice(Cart.total('RWF'), 'RWF');
+    }
   },
   renderSidebar() {
     const container = document.getElementById('cart-items');
@@ -325,7 +362,7 @@ const Cart = {
         Your cart is empty.<br>Explore our marketplace!
       </div>`;
       const totalEmpty = document.getElementById('cart-total-amount');
-      if (totalEmpty) totalEmpty.textContent = formatPrice(0);
+      if (totalEmpty) totalEmpty.textContent = formatPrice(0, 'RWF');
       return;
     }
 
@@ -334,7 +371,7 @@ const Cart = {
         <div class="cart-item-img">${item.emoji || '🍲'}</div>
         <div class="cart-item-info">
           <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-price">${formatPrice(item.price * item.qty, item.currency || 'USD')}</div>
+          <div class="cart-item-price">${formatPrice(item.price * item.qty, item.currency || 'RWF')}</div>
         </div>
         <div class="cart-item-qty">
           <button class="qty-btn" onclick="Cart.changeQty('${item.id}', -1)">−</button>
@@ -346,14 +383,226 @@ const Cart = {
 
     const total = document.getElementById('cart-total-amount');
     if (total) {
-      const grouped = Cart.totals();
-      const output = Object.entries(grouped)
-        .map(([currency, amount]) => formatPrice(amount, currency))
-        .join(' + ');
-      total.textContent = output;
+      total.textContent = formatPrice(Cart.total('RWF'), 'RWF');
     }
   }
 };
+
+const CHECKOUT_DELIVERY_FEE_RWF = 1500;
+
+function ensureCheckoutModal() {
+  if (document.getElementById('checkout-modal')) return;
+
+  const modal = document.createElement('div');
+  modal.id = 'checkout-modal';
+  modal.className = 'checkout-modal';
+  modal.setAttribute('aria-hidden', 'true');
+  modal.innerHTML = `
+    <div class="checkout-overlay" data-checkout-close></div>
+    <div class="checkout-panel" role="dialog" aria-modal="true" aria-label="Checkout">
+      <button class="checkout-close" type="button" data-checkout-close>×</button>
+
+      <div class="checkout-header">
+        <h3>Checkout</h3>
+        <p>Review order summary, add delivery details, and choose payment.</p>
+      </div>
+
+      <div class="checkout-layout">
+        <section class="checkout-summary-block">
+          <h4>Order Summary</h4>
+          <div id="checkout-items" class="checkout-items"></div>
+
+          <div class="checkout-totals">
+            <div class="checkout-total-row"><span>Subtotal</span><strong id="checkout-subtotal">0 RWF</strong></div>
+            <div class="checkout-total-row"><span>Delivery Fee</span><strong id="checkout-delivery-fee">0 RWF</strong></div>
+            <div class="checkout-total-row grand"><span>Total</span><strong id="checkout-total">0 RWF</strong></div>
+          </div>
+        </section>
+
+        <section class="checkout-form-block">
+          <form id="checkout-form" class="checkout-form">
+            <h4>Delivery Details</h4>
+            <div class="checkout-fields-grid">
+              <div class="form-group">
+                <label for="checkout-country">Country</label>
+                <input id="checkout-country" name="country" type="text" placeholder="e.g. Rwanda" required />
+              </div>
+              <div class="form-group">
+                <label for="checkout-area">Area</label>
+                <input id="checkout-area" name="area" type="text" placeholder="e.g. Kicukiro" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="checkout-address">Street Address</label>
+              <input id="checkout-address" name="address" type="text" placeholder="Street and building" required />
+            </div>
+
+            <div class="form-group">
+              <label for="checkout-phone">Phone Number</label>
+              <input id="checkout-phone" name="phone" type="tel" placeholder="e.g. +2507XXXXXXXX" required />
+            </div>
+
+            <h4>Payment Option</h4>
+            <div class="payment-options-grid" id="payment-options-grid">
+              <label class="payment-option active">
+                <input type="radio" name="payment-method" value="Card" checked />
+                <span>Card</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment-method" value="MTN Mobile Money" />
+                <span>MTN Mobile Money</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment-method" value="Airtel Money" />
+                <span>Airtel Money</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-primary btn-full">Place Order</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.querySelectorAll('[data-checkout-close]').forEach(el => {
+    el.addEventListener('click', closeCheckoutModal);
+  });
+
+  const paymentGrid = modal.querySelector('#payment-options-grid');
+  const syncPaymentActiveState = () => {
+    if (!paymentGrid) return;
+    paymentGrid.querySelectorAll('.payment-option').forEach(option => {
+      const input = option.querySelector('input[type="radio"]');
+      option.classList.toggle('active', Boolean(input?.checked));
+    });
+  };
+
+  paymentGrid?.querySelectorAll('input[type="radio"]').forEach(input => {
+    input.addEventListener('change', syncPaymentActiveState);
+  });
+
+  const checkoutForm = modal.querySelector('#checkout-form');
+  checkoutForm?.addEventListener('submit', event => {
+    event.preventDefault();
+
+    if (Cart.count() === 0) {
+      showToast('Your cart is empty. Add meals before checkout.');
+      return;
+    }
+
+    const country = document.getElementById('checkout-country');
+    const area = document.getElementById('checkout-area');
+    const address = document.getElementById('checkout-address');
+    const phone = document.getElementById('checkout-phone');
+    const paymentMethod = checkoutForm.querySelector('input[name="payment-method"]:checked');
+
+    if (!country?.value.trim() || !area?.value.trim() || !address?.value.trim() || !phone?.value.trim()) {
+      showToast('Please complete all delivery details.');
+      return;
+    }
+
+    if (!paymentMethod) {
+      showToast('Please choose a payment method.');
+      return;
+    }
+
+    showToast(`Order placed successfully via ${paymentMethod.value}.`);
+    Cart.save([]);
+    Cart.renderSidebar();
+    renderCheckoutSummary();
+    checkoutForm.reset();
+    const defaultPayment = checkoutForm.querySelector('input[name="payment-method"][value="Card"]');
+    if (defaultPayment) defaultPayment.checked = true;
+    syncPaymentActiveState();
+    closeCheckoutModal();
+  });
+
+  document.addEventListener('keydown', event => {
+    const isOpen = modal.classList.contains('open');
+    if (!isOpen) return;
+    if (event.key === 'Escape') closeCheckoutModal();
+  });
+}
+
+function renderCheckoutSummary() {
+  const itemsWrap = document.getElementById('checkout-items');
+  const subtotalEl = document.getElementById('checkout-subtotal');
+  const deliveryEl = document.getElementById('checkout-delivery-fee');
+  const totalEl = document.getElementById('checkout-total');
+  if (!itemsWrap || !subtotalEl || !deliveryEl || !totalEl) return;
+
+  const items = Cart.get();
+  if (!items.length) {
+    itemsWrap.innerHTML = '<div class="checkout-empty">No meals selected yet.</div>';
+    subtotalEl.textContent = formatPrice(0, 'RWF');
+    deliveryEl.textContent = formatPrice(0, 'RWF');
+    totalEl.textContent = formatPrice(0, 'RWF');
+    return;
+  }
+
+  itemsWrap.innerHTML = items.map(item => `
+    <div class="checkout-item-row">
+      <div class="checkout-item-main">
+        <span class="checkout-item-name">${item.name}</span>
+        <span class="checkout-item-price">${formatPrice(item.price, 'RWF')}</span>
+      </div>
+      <div class="checkout-qty-controls">
+        <button type="button" class="checkout-qty-btn" onclick="updateCheckoutItemQty('${item.id}', -1)">-</button>
+        <span class="checkout-qty-value">${item.qty}</span>
+        <button type="button" class="checkout-qty-btn" onclick="updateCheckoutItemQty('${item.id}', 1)">+</button>
+      </div>
+    </div>
+  `).join('');
+
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const deliveryFee = items.length ? CHECKOUT_DELIVERY_FEE_RWF : 0;
+  const total = subtotal + deliveryFee;
+
+  subtotalEl.textContent = formatPrice(subtotal, 'RWF');
+  deliveryEl.textContent = formatPrice(deliveryFee, 'RWF');
+  totalEl.textContent = formatPrice(total, 'RWF');
+}
+
+function updateCheckoutItemQty(itemId, delta) {
+  Cart.changeQty(itemId, delta);
+  renderCheckoutSummary();
+}
+
+function openCheckoutModal() {
+  ensureCheckoutModal();
+  const modal = document.getElementById('checkout-modal');
+  if (!modal) return;
+
+  renderCheckoutSummary();
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCheckoutModal() {
+  const modal = document.getElementById('checkout-modal');
+  if (!modal) return;
+
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+function initCheckoutSystem() {
+  ensureCheckoutModal();
+
+  document.querySelectorAll('.cart-footer .btn-primary.btn-full').forEach(button => {
+    button.removeAttribute('onclick');
+    button.addEventListener('click', event => {
+      event.preventDefault();
+      openCheckoutModal();
+    });
+  });
+}
 
 // ── Toast ─────────────────────────────────────
 function showToast(msg, duration = 3000) {
@@ -744,13 +993,23 @@ function initSignupForm() {
   const form = document.getElementById('signup-form');
   if (!form) return;
 
+  if (form.classList.contains('signup-multistep')) {
+    initSignupMultiStepForm(form);
+    return;
+  }
+
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  if (!nameInput || !emailInput || !passwordInput) return;
+
   form.addEventListener('submit', e => {
     e.preventDefault();
     let valid = true;
 
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
 
     clearError('name');
     clearError('email');
@@ -776,6 +1035,85 @@ function initSignupForm() {
       }, 1800);
     }
   });
+}
+
+function initSignupMultiStepForm(form) {
+  const steps = Array.from(form.querySelectorAll('.signup-step'));
+  if (!steps.length) return;
+
+  const progressSteps = Array.from(form.querySelectorAll('.signup-progress-step'));
+  let activeStepIndex = 0;
+
+  const showStep = index => {
+    activeStepIndex = Math.max(0, Math.min(index, steps.length - 1));
+
+    steps.forEach((step, i) => {
+      const isActive = i === activeStepIndex;
+      step.classList.toggle('active', isActive);
+      step.hidden = !isActive;
+    });
+
+    progressSteps.forEach((step, i) => {
+      step.classList.toggle('active', i === activeStepIndex);
+      step.classList.toggle('done', i < activeStepIndex);
+    });
+  };
+
+  const validateActiveStep = () => {
+    const currentStep = steps[activeStepIndex];
+    if (!currentStep) return true;
+
+    const requiredFields = Array.from(currentStep.querySelectorAll('[required]'));
+    const invalidField = requiredFields.find(field => {
+      if (field.type === 'checkbox' || field.type === 'radio') {
+        return !field.checked;
+      }
+      return !String(field.value || '').trim();
+    });
+
+    if (invalidField) {
+      invalidField.focus();
+      showToast('Please complete all required fields in this step.');
+      return false;
+    }
+
+    if (activeStepIndex === 1) {
+      const selectedGoals = form.querySelectorAll('input[name="health-goals"]:checked');
+      if (!selectedGoals.length) {
+        showToast('Select at least one health goal to continue.');
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  form.querySelectorAll('[data-step-next]').forEach(button => {
+    button.addEventListener('click', event => {
+      event.preventDefault();
+      if (!validateActiveStep()) return;
+      showStep(activeStepIndex + 1);
+    });
+  });
+
+  form.querySelectorAll('[data-step-prev]').forEach(button => {
+    button.addEventListener('click', event => {
+      event.preventDefault();
+      showStep(activeStepIndex - 1);
+    });
+  });
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!validateActiveStep()) return;
+
+    showToast('Account created successfully. Your health preferences are saved.');
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 1300);
+  });
+
+  showStep(0);
 }
 
 function initBookingForm() {
@@ -892,6 +1230,58 @@ function initHealthGoalSelector() {
     setHealthGoal(nextGoal);
     showToast(`Goal selected: ${HEALTH_GOAL_LABELS[nextGoal] || HEALTH_GOAL_LABELS.all}`);
   });
+}
+
+function initExpandableSections() {
+  const setupGroup = (cardSelector, panelSelector, buttonSelector, expandedLabel) => {
+    document.querySelectorAll(cardSelector).forEach(card => {
+      const panel = card.querySelector(panelSelector);
+      const button = card.querySelector(buttonSelector);
+      if (!panel || !button) return;
+
+      const collapsedLabel = button.textContent.trim();
+      panel.hidden = true;
+      panel.style.maxHeight = '0px';
+      panel.style.opacity = '0';
+
+      button.addEventListener('click', () => {
+        const isExpanded = card.classList.contains('expanded');
+
+        if (isExpanded) {
+          panel.style.maxHeight = `${panel.scrollHeight}px`;
+          requestAnimationFrame(() => {
+            panel.style.maxHeight = '0px';
+            panel.style.opacity = '0';
+          });
+
+          const onEnd = () => {
+            panel.hidden = true;
+            panel.removeEventListener('transitionend', onEnd);
+          };
+          panel.addEventListener('transitionend', onEnd);
+
+          card.classList.remove('expanded');
+          button.textContent = collapsedLabel;
+          button.setAttribute('aria-expanded', 'false');
+          return;
+        }
+
+        panel.hidden = false;
+        panel.style.maxHeight = '0px';
+        requestAnimationFrame(() => {
+          panel.style.maxHeight = `${panel.scrollHeight}px`;
+          panel.style.opacity = '1';
+        });
+
+        card.classList.add('expanded');
+        button.textContent = expandedLabel;
+        button.setAttribute('aria-expanded', 'true');
+      });
+    });
+  };
+
+  setupGroup('[data-about-card]', '[data-about-more]', '[data-about-toggle]', 'Read Less');
+  setupGroup('[data-guide-card]', '[data-guide-more]', '[data-guide-toggle]', 'Hide Guide');
 }
 
 function getFilteredMeals() {
@@ -1372,7 +1762,9 @@ function initScrollAnimation() {
 // ── Init ──────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
+  initCheckoutSystem();
   initHealthGoalSelector();
+  initExpandableSections();
   initHomeSections();
   initMarketplace();
   initLoginForm();
