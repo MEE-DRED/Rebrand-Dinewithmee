@@ -96,14 +96,14 @@ const MEALS = [
 ];
 
 const INGREDIENTS = [
-  { id: 'i1', region: 'West Africa', name: 'Uda / Negro Pepper', desc: 'Aromatic West African spice for soups, stews, and postpartum dishes.', price: 4.99, emoji: '🌶️' },
-  { id: 'i2', region: 'West Africa', name: 'Red Palm Oil (500ml)', desc: 'Unrefined palm oil rich in carotenoids and vitamin E. Signature flavour.', price: 7.50, emoji: '🫙' },
-  { id: 'i3', region: 'West Africa', name: 'Locust Beans (Iru)', desc: 'Fermented locust beans — umami seasoning for soups and sauces.', price: 3.99, emoji: '🫘' },
-  { id: 'i4', region: 'East Africa', name: 'Berbere Spice Blend', desc: 'Ethiopian spice mix with chili, fenugreek, korarima, and rue.', price: 6.50, emoji: '🌿' },
-  { id: 'i5', region: 'East Africa', name: 'Ugali Maize Flour (1kg)', desc: 'Finely milled white maize flour for authentic ugali and sadza.', price: 5.00, emoji: '🌾' },
-  { id: 'i6', region: 'North Africa', name: 'Harissa Paste (200g)', desc: 'Tunisian hot chili paste with coriander, caraway, garlic, and olive oil.', price: 5.99, emoji: '🌶️' },
-  { id: 'i7', region: 'Southern Africa', name: 'Chakalaka Relish', desc: 'Spicy bean and vegetable relish. Perfect with braai or pap.', price: 4.50, emoji: '🫙' },
-  { id: 'i8', region: 'Central Africa', name: 'Mbongo Spice', desc: 'Cameroonian black spice from burnt bark — deep, smoky, unique.', price: 5.75, emoji: '🖤' },
+  { id: 'i1', region: 'West Africa', name: 'Uda / Negro Pepper', desc: 'Aromatic West African spice for soups, stews, and postpartum dishes.', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA1x9szHQ2glQGbqHx7Ftv9hp6qpR9_lJOPg&s', price: 4.99, emoji: '🌶️' },
+  { id: 'i2', region: 'West Africa', name: 'Red Palm Oil (500ml)', desc: 'Unrefined palm oil rich in carotenoids and vitamin E. Signature flavour.', image: 'https://www.palmoilextractionmachine.com/uploads/allimg/140818/1-140QQ54J2Z6.jpg', price: 7.50, emoji: '🫙' },
+  { id: 'i3', region: 'West Africa', name: 'Locust Beans (Iru)', desc: 'Fermented locust beans — umami seasoning for soups and sauces.', image: 'https://mile12african.ca/cdn/shop/files/image-500x500_89.png?v=1715465419&width=600', price: 3.99, emoji: '🫘' },
+  { id: 'i4', region: 'East Africa', name: 'Berbere Spice Blend', desc: 'Ethiopian spice mix with chili, fenugreek, korarima, and rue.', image: 'https://img.buzzfeed.com/thumbnailer-prod-us-east-1/10b476bac0784728a60eae5de9f45a54/BFV40270_4DIYSpiceBlends-FB1080SQ.jpg?resize=1200:*', price: 6.50, emoji: '🌿' },
+  { id: 'i5', region: 'East Africa', name: 'Ugali Maize Flour (1kg)', desc: 'Finely milled white maize flour for authentic ugali and sadza.', image: 'https://m.media-amazon.com/images/I/81oj6Nlda7L._AC_UF894,1000_QL80_.jpg', price: 5.00, emoji: '🌾' },
+  { id: 'i6', region: 'North Africa', name: 'Harissa Paste (200g)', desc: 'Tunisian hot chili paste with coriander, caraway, garlic, and olive oil.', image: 'https://s.lightorangebean.com/media/20240914142652/Homemade-Spicy-Harissa-Paste_done.png', price: 5.99, emoji: '🌶️' },
+  { id: 'i7', region: 'Southern Africa', name: 'Chakalaka Relish', desc: 'Spicy bean and vegetable relish. Perfect with braai or pap.', image: 'https://sibamtongana.com/wp-content/uploads/2023/02/sibas-secret-chakalaka.jpg', price: 4.50, emoji: '🫙' },
+  { id: 'i8', region: 'Central Africa', name: 'Mbongo Spice', desc: 'Cameroonian black spice from burnt bark — deep, smoky, unique.', image: 'https://m.media-amazon.com/images/I/81jzgDcB0oL._AC_UF894,1000_QL80_.jpg', price: 5.75, emoji: '🖤' },
 ];
 
 const CHEFS = [
@@ -710,7 +710,15 @@ function renderIngredientCards(items, containerId) {
 
   container.innerHTML = items.map(item => `
     <div class="meal-card">
-      <div class="meal-img-placeholder">${item.emoji}</div>
+      ${item.image
+        ? `
+          <div class="meal-media">
+            <img class="meal-img" src="${item.image}" alt="${item.name}" loading="lazy" referrerpolicy="no-referrer" onerror="handleMealImageError(this)">
+            <div class="meal-img-placeholder meal-img-fallback" style="display:none">${item.emoji}</div>
+          </div>
+        `
+        : `<div class="meal-img-placeholder">${item.emoji}</div>`
+      }
       <div class="meal-body">
         <div class="meal-region">${item.region}</div>
         <h3>${item.name}</h3>
