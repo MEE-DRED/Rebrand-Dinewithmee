@@ -109,6 +109,55 @@ function formatPrice(amount, currency = 'USD') {
   return `$${Number(amount).toFixed(2)}`;
 }
 
+const Favorites = {
+  get() {
+    try {
+      const data = JSON.parse(localStorage.getItem('dwm_favorites') || '[]');
+      return Array.isArray(data) ? data : [];
+    } catch {
+      return [];
+    }
+  },
+  clear() {
+    localStorage.removeItem('dwm_favorites');
+  },
+  save(ids) {
+    localStorage.setItem('dwm_favorites', JSON.stringify(ids));
+  },
+  has(id) {
+    return Favorites.get().includes(id);
+  },
+  toggle(id) {
+    const set = new Set(Favorites.get());
+    if (set.has(id)) {
+      set.delete(id);
+      Favorites.save([...set]);
+      return false;
+    }
+    set.add(id);
+    Favorites.save([...set]);
+    return true;
+  }
+};
+
+function updateFavoritesToggleState() {
+  const btn = document.getElementById('meal-favorites-toggle');
+  if (!btn) return;
+
+  const count = Favorites.get().length;
+  btn.classList.toggle('active', favoritesOnly);
+  btn.textContent = favoritesOnly
+    ? `Showing Favorites (${count})`
+    : `Show Favorites Only (${count})`;
+}
+
+function toggleFavoriteMeal(mealId) {
+  const saved = Favorites.toggle(mealId);
+  showToast(saved ? 'Meal saved to favorites ♥' : 'Meal removed from favorites');
+  updateFavoritesToggleState();
+  renderMarketplaceMeals();
+}
+
 // ── Cart System ──────────────────────────────
 const Cart = {
   get() {
@@ -222,27 +271,30 @@ function showToast(msg, duration = 3000) {
 }
 
 // ── Render Helpers ────────────────────────────
-function renderMealCards(meals, containerId) {
+function renderMealCards(meals, containerId, options = {}) {
   const container = document.getElementById(containerId);
   if (!container) return;
+  const showDetails = options.showDetails === true;
+  const favoriteIds = new Set(Favorites.get());
 
   container.innerHTML = meals.map(meal => {
     const tagHTML = meal.tag
       ? `<span style="position:absolute;top:14px;left:14px;background:var(--gold);color:var(--green-deep);font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:0.06em">${meal.tag}</span>`
       : '';
     const regionLabel = meal.country ? `${meal.region} · ${meal.country}` : meal.region;
-    const nutritionHTML = meal.nutrition
+    const nutritionHTML = showDetails && meal.nutrition
       ? `<div class="meal-nutrition">🔥 ${meal.nutrition.calories} kcal · P ${meal.nutrition.protein}g · C ${meal.nutrition.carbs}g · F ${meal.nutrition.fats}g</div>`
       : '';
-    const ingredientHTML = Array.isArray(meal.ingredients) && meal.ingredients.length
+    const ingredientHTML = showDetails && Array.isArray(meal.ingredients) && meal.ingredients.length
       ? `<div class="meal-ingredients"><strong>Ingredients:</strong> ${meal.ingredients.slice(0, 5).join(', ')}${meal.ingredients.length > 5 ? ', ...' : ''}</div>`
       : '';
-    const healthTagsHTML = Array.isArray(meal.healthTags) && meal.healthTags.length
+    const healthTagsHTML = showDetails && Array.isArray(meal.healthTags) && meal.healthTags.length
       ? `<div class="meal-health-tags">${meal.healthTags.slice(0, 3).map(tag => `<span class="meal-health-tag">${tag}</span>`).join('')}</div>`
       : '';
-    const ingredientNutritionHTML = Array.isArray(meal.ingredientNutrition) && meal.ingredientNutrition.length
+    const ingredientNutritionHTML = showDetails && Array.isArray(meal.ingredientNutrition) && meal.ingredientNutrition.length
       ? `<div class="meal-ingredient-nutrition">${meal.ingredientNutrition[0]}</div>`
       : '';
+    const isFavorite = favoriteIds.has(meal.id);
 
     return `
       <div class="meal-card" data-region="${meal.region}">
@@ -260,9 +312,13 @@ function renderMealCards(meals, containerId) {
           ${healthTagsHTML}
           <div class="meal-footer">
             <span class="meal-price">${formatPrice(meal.price, meal.currency || 'USD')}</span>
-            <button class="btn-add-cart" onclick='Cart.add(${JSON.stringify({ id: meal.id, name: meal.name, price: meal.price, emoji: meal.emoji, currency: meal.currency || 'USD' })})'>
-              Add to Cart
-            </button>
+            <div class="meal-card-actions">
+              ${showDetails ? `<button class="btn-view-details" onclick="openMealDetail('${meal.id}')">Details</button>` : ''}
+              ${showDetails ? `<button class="btn-favorite ${isFavorite ? 'active' : ''}" onclick="toggleFavoriteMeal('${meal.id}')" aria-label="${isFavorite ? 'Remove from favorites' : 'Save meal'}">${isFavorite ? '♥' : '♡'}</button>` : ''}
+              <button class="btn-add-cart" onclick='Cart.add(${JSON.stringify({ id: meal.id, name: meal.name, price: meal.price, emoji: meal.emoji, currency: meal.currency || 'USD' })})'>
+                Add to Cart
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -325,6 +381,129 @@ function renderTestimonials() {
       </div>
     </div>
   `).join('');
+}
+
+function openMealDetail(mealId) {
+  const meal = MEALS.find(m => m.id === mealId);
+  if (!meal) return;
+
+  const existing = document.getElementById('meal-modal');
+  if (existing) existing.remove();
+
+  const healthTagsHTML = (meal.healthTags || [])
+    .map(tag => `<span class="health-tag-pill">${tag}</span>`)
+    .join('');
+
+  const ingredientFacts = meal.ingredientNutrition || [];
+  const ingredientsHTML = (meal.ingredients || []).map(ingredient => {
+    const fact = ingredientFacts.find(f => f.toLowerCase().startsWith(ingredient.toLowerCase()));
+    const benefit = fact ? fact.replace(/^.*?->\s*/, '') : 'Nutrient-dense traditional ingredient.';
+    return `
+      <div class="detail-ingredient">
+        <div class="ing-header">
+          <span class="ing-emoji">🥗</span>
+          <span class="ing-name">${ingredient}</span>
+        </div>
+        <p class="ing-benefit">💡 ${benefit}</p>
+      </div>
+    `;
+  }).join('');
+
+  const n = meal.nutrition || {};
+  const modal = document.createElement('div');
+  modal.id = 'meal-modal';
+  modal.innerHTML = `
+    <div class="modal-overlay" id="meal-modal-overlay"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-label="${meal.name} nutrition details">
+      <button class="modal-close" id="meal-modal-close">✕</button>
+
+      <div class="modal-hero">
+        <div class="modal-emoji">${meal.emoji}</div>
+        <div class="modal-hero-info">
+          <div class="modal-region">${meal.region} · ${meal.country || 'Africa'}</div>
+          <h2 class="modal-title">${meal.name}</h2>
+          <p class="modal-desc">${meal.desc}</p>
+          <div class="modal-meta">
+            <span>🧾 ${(meal.ingredients || []).length} ingredients</span>
+            <span class="modal-price">${formatPrice(meal.price, meal.currency || 'USD')}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <section class="modal-section">
+          <h3 class="modal-section-title">🏷️ Health Profile</h3>
+          <div class="health-tags-row">${healthTagsHTML || '<span class="health-tag-pill">Balanced Meal</span>'}</div>
+        </section>
+
+        <section class="modal-section">
+          <h3 class="modal-section-title">📊 Nutrition Summary</h3>
+          <div class="macro-grid">
+            <div class="macro-card" style="border-color:#e74c3c20;background:#e74c3c08">
+              <div class="macro-val" style="color:#e74c3c">${n.calories ?? '--'}</div>
+              <div class="macro-lbl">Calories</div>
+            </div>
+            <div class="macro-card" style="border-color:#145A3E20;background:#145A3E08">
+              <div class="macro-val" style="color:#145A3E">${n.protein ?? '--'}g</div>
+              <div class="macro-lbl">Protein</div>
+            </div>
+            <div class="macro-card" style="border-color:#f39c1220;background:#f39c1208">
+              <div class="macro-val" style="color:#f39c12">${n.carbs ?? '--'}g</div>
+              <div class="macro-lbl">Carbs</div>
+            </div>
+            <div class="macro-card" style="border-color:#C9973A20;background:#C9973A08">
+              <div class="macro-val" style="color:#C9973A">${n.fats ?? '--'}g</div>
+              <div class="macro-lbl">Fats</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="modal-section">
+          <h3 class="modal-section-title">🌿 Ingredient Nutrition Breakdown</h3>
+          <div class="ingredients-detail">${ingredientsHTML}</div>
+        </section>
+
+        <div class="modal-footer">
+          <div class="modal-price-big">${formatPrice(meal.price, meal.currency || 'USD')}</div>
+          <button class="btn-primary" style="padding:14px 34px;font-size:15px;" onclick='Cart.add(${JSON.stringify({ id: meal.id, name: meal.name, price: meal.price, emoji: meal.emoji, currency: meal.currency || 'USD' })}); closeMealDetail()'>
+            🛒 Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('meal-modal-overlay')?.addEventListener('click', closeMealDetail);
+  document.getElementById('meal-modal-close')?.addEventListener('click', closeMealDetail);
+  document.addEventListener('keydown', handleMealModalEscape);
+
+  requestAnimationFrame(() => {
+    modal.querySelector('.modal-overlay').style.opacity = '1';
+    modal.querySelector('.modal-panel').style.transform = 'translateX(0)';
+  });
+}
+
+function handleMealModalEscape(e) {
+  if (e.key === 'Escape') closeMealDetail();
+}
+
+function closeMealDetail() {
+  const modal = document.getElementById('meal-modal');
+  if (!modal) return;
+
+  const panel = modal.querySelector('.modal-panel');
+  const overlay = modal.querySelector('.modal-overlay');
+  if (panel) panel.style.transform = 'translateX(100%)';
+  if (overlay) overlay.style.opacity = '0';
+
+  document.removeEventListener('keydown', handleMealModalEscape);
+  setTimeout(() => {
+    modal.remove();
+    document.body.style.overflow = '';
+  }, 320);
 }
 
 // ── Navbar and UI Init ───────────────────────
@@ -481,17 +660,386 @@ function initHomeSections() {
 }
 
 let currentMealRegion = 'All';
+let currentMealHealthTags = new Set();
+let currentMealSearch = '';
+let currentMealSort = 'featured';
+let currentMaxCalories = Number.POSITIVE_INFINITY;
+let currentMinProtein = 0;
+let favoritesOnly = false;
 
-function renderMarketplaceMeals() {
-  const meals = currentMealRegion === 'All'
-    ? MEALS
+const MEALS_PER_PAGE = 12;
+let mealsVisibleCount = MEALS_PER_PAGE;
+
+function getFilteredMeals() {
+  let meals = currentMealRegion === 'All'
+    ? [...MEALS]
     : MEALS.filter(m => m.region === currentMealRegion);
 
-  renderMealCards(meals, 'marketplace-meals');
+  if (currentMealHealthTags.size > 0) {
+    meals = meals.filter(m => Array.isArray(m.healthTags) && m.healthTags.some(tag => currentMealHealthTags.has(tag)));
+  }
+
+  if (favoritesOnly) {
+    const favoriteIds = new Set(Favorites.get());
+    meals = meals.filter(m => favoriteIds.has(m.id));
+  }
+
+  if (Number.isFinite(currentMaxCalories)) {
+    meals = meals.filter(m => Number(m.nutrition?.calories || 0) <= currentMaxCalories);
+  }
+
+  if (currentMinProtein > 0) {
+    meals = meals.filter(m => Number(m.nutrition?.protein || 0) >= currentMinProtein);
+  }
+
+  const q = currentMealSearch.trim().toLowerCase();
+  if (q) {
+    meals = meals.filter(m => {
+      const haystack = [m.name, m.country, m.region, ...(m.ingredients || [])].join(' ').toLowerCase();
+      return haystack.includes(q);
+    });
+  }
+
+  return meals;
+}
+
+function sortMeals(meals) {
+  const sorted = [...meals];
+  const tagWeight = { bestseller: 0, popular: 1, 'chef special': 2, '': 3 };
+
+  switch (currentMealSort) {
+    case 'price-asc':
+      sorted.sort((a, b) => Number(a.price || 0) - Number(b.price || 0));
+      break;
+    case 'price-desc':
+      sorted.sort((a, b) => Number(b.price || 0) - Number(a.price || 0));
+      break;
+    case 'calories-asc':
+      sorted.sort((a, b) => Number(a.nutrition?.calories || 0) - Number(b.nutrition?.calories || 0));
+      break;
+    case 'calories-desc':
+      sorted.sort((a, b) => Number(b.nutrition?.calories || 0) - Number(a.nutrition?.calories || 0));
+      break;
+    case 'protein-desc':
+      sorted.sort((a, b) => Number(b.nutrition?.protein || 0) - Number(a.nutrition?.protein || 0));
+      break;
+    case 'name-asc':
+      sorted.sort((a, b) => String(a.name || '').localeCompare(String(b.name || '')));
+      break;
+    default:
+      sorted.sort((a, b) => {
+        const aW = tagWeight[a.tag || ''] ?? 3;
+        const bW = tagWeight[b.tag || ''] ?? 3;
+        if (aW !== bW) return aW - bW;
+        return String(a.name || '').localeCompare(String(b.name || ''));
+      });
+      break;
+  }
+
+  return sorted;
+}
+
+function resetMealPagination() {
+  mealsVisibleCount = MEALS_PER_PAGE;
+}
+
+function syncHealthFilterButtonState() {
+  const container = document.getElementById('health-filter');
+  if (!container) return;
+
+  container.querySelectorAll('.health-filter-btn').forEach(btn => {
+    const tag = btn.dataset.tag || '';
+    if (tag === '__all__') {
+      btn.classList.toggle('active', currentMealHealthTags.size === 0);
+    } else {
+      btn.classList.toggle('active', currentMealHealthTags.has(tag));
+    }
+  });
+}
+
+function refreshNutritionLabels() {
+  const caloriesInput = document.getElementById('meal-calories-range');
+  const caloriesValue = document.getElementById('meal-calories-value');
+  const proteinInput = document.getElementById('meal-protein-range');
+  const proteinValue = document.getElementById('meal-protein-value');
+  if (!caloriesInput || !caloriesValue || !proteinInput || !proteinValue) return;
+
+  const maxCalories = Number(caloriesInput.dataset.maxValue || caloriesInput.max || 0);
+  const selectedCalories = Number(caloriesInput.value || maxCalories);
+  currentMaxCalories = selectedCalories >= maxCalories ? Number.POSITIVE_INFINITY : selectedCalories;
+  caloriesValue.textContent = selectedCalories >= maxCalories ? `Any (up to ${maxCalories} kcal)` : `${selectedCalories} kcal`;
+
+  const selectedProtein = Number(proteinInput.value || 0);
+  currentMinProtein = selectedProtein;
+  proteinValue.textContent = `${selectedProtein}g+`;
+}
+
+function renderFavoritesSection() {
+  const section = document.getElementById('favorites-section');
+  const grid = document.getElementById('meal-favorites-grid');
+  const clearBtn = document.getElementById('meal-clear-favorites');
+  if (!section || !grid) return;
+
+  const favoriteIds = new Set(Favorites.get());
+  const meals = MEALS.filter(m => favoriteIds.has(m.id));
+
+  if (!meals.length) {
+    section.style.display = 'none';
+    if (clearBtn) clearBtn.style.display = 'none';
+    return;
+  }
+
+  section.style.display = '';
+  if (clearBtn) clearBtn.style.display = '';
+  renderMealCards(sortMeals(meals).slice(0, 6), 'meal-favorites-grid', { showDetails: true });
+}
+
+function buildHealthFilterButtons() {
+  const container = document.getElementById('health-filter');
+  if (!container) return;
+
+  const tags = [...new Set(MEALS.flatMap(m => m.healthTags || []))].sort((a, b) => a.localeCompare(b));
+  container.innerHTML = [
+    '<button class="health-filter-btn active" data-tag="__all__">All Health Tags</button>',
+    ...tags.map(tag => `<button class="health-filter-btn" data-tag="${tag}">${tag}</button>`),
+  ].join('');
+
+  container.querySelectorAll('.health-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag || '';
+      if (tag === '__all__') {
+        currentMealHealthTags.clear();
+      } else if (currentMealHealthTags.has(tag)) {
+        currentMealHealthTags.delete(tag);
+      } else {
+        currentMealHealthTags.add(tag);
+      }
+
+      syncHealthFilterButtonState();
+      resetMealPagination();
+      renderMarketplaceMeals();
+    });
+  });
+}
+
+function initMealSearch() {
+  const input = document.getElementById('meal-search');
+  if (!input) return;
+
+  input.addEventListener('input', () => {
+    currentMealSearch = input.value || '';
+    resetMealPagination();
+    renderMarketplaceMeals();
+  });
+}
+
+function initNutritionFilters() {
+  const caloriesInput = document.getElementById('meal-calories-range');
+  const caloriesValue = document.getElementById('meal-calories-value');
+  const proteinInput = document.getElementById('meal-protein-range');
+  const proteinValue = document.getElementById('meal-protein-value');
+
+  if (!caloriesInput || !caloriesValue || !proteinInput || !proteinValue) return;
+
+  const caloriesData = MEALS
+    .map(m => Number(m.nutrition?.calories || 0))
+    .filter(v => Number.isFinite(v) && v > 0);
+
+  const proteinData = MEALS
+    .map(m => Number(m.nutrition?.protein || 0))
+    .filter(v => Number.isFinite(v) && v >= 0);
+
+  const minCalories = Math.min(...caloriesData);
+  const maxCalories = Math.max(...caloriesData);
+  const maxProtein = Math.max(...proteinData);
+
+  caloriesInput.min = String(minCalories);
+  caloriesInput.max = String(maxCalories);
+  caloriesInput.value = String(maxCalories);
+  caloriesInput.dataset.maxValue = String(maxCalories);
+
+  proteinInput.min = '0';
+  proteinInput.max = String(maxProtein);
+  proteinInput.value = '0';
+  proteinInput.dataset.maxValue = String(maxProtein);
+
+  refreshNutritionLabels();
+
+  caloriesInput.addEventListener('input', () => {
+    refreshNutritionLabels();
+    resetMealPagination();
+    renderMarketplaceMeals();
+  });
+
+  proteinInput.addEventListener('input', () => {
+    refreshNutritionLabels();
+    resetMealPagination();
+    renderMarketplaceMeals();
+  });
+}
+
+function clearMealFilters() {
+  currentMealRegion = 'All';
+  currentMealHealthTags.clear();
+  currentMealSearch = '';
+  currentMealSort = 'featured';
+  favoritesOnly = false;
+
+  const searchInput = document.getElementById('meal-search');
+  if (searchInput) searchInput.value = '';
+
+  const sortSelect = document.getElementById('meal-sort');
+  if (sortSelect) sortSelect.value = 'featured';
+
+  const regionButtons = [...document.querySelectorAll('#region-filter .region-btn')];
+  regionButtons.forEach(b => b.classList.remove('active'));
+  if (regionButtons[0]) regionButtons[0].classList.add('active');
+
+  const caloriesInput = document.getElementById('meal-calories-range');
+  if (caloriesInput) caloriesInput.value = caloriesInput.max;
+
+  const proteinInput = document.getElementById('meal-protein-range');
+  if (proteinInput) proteinInput.value = '0';
+
+  syncHealthFilterButtonState();
+  refreshNutritionLabels();
+  updateFavoritesToggleState();
+  resetMealPagination();
+  renderMarketplaceMeals();
+}
+
+function initMealClearFilters() {
+  const button = document.getElementById('meal-clear-filters');
+  if (!button) return;
+
+  button.addEventListener('click', () => {
+    clearMealFilters();
+    showToast('Meal filters reset.');
+  });
+}
+
+function initClearFavorites() {
+  const button = document.getElementById('meal-clear-favorites');
+  if (!button) return;
+
+  button.addEventListener('click', () => {
+    Favorites.clear();
+    favoritesOnly = false;
+    updateFavoritesToggleState();
+    resetMealPagination();
+    renderMarketplaceMeals();
+    showToast('Saved favorites cleared.');
+  });
+}
+
+function initFavoritesToggle() {
+  const button = document.getElementById('meal-favorites-toggle');
+  if (!button) return;
+
+  updateFavoritesToggleState();
+  button.addEventListener('click', () => {
+    favoritesOnly = !favoritesOnly;
+    updateFavoritesToggleState();
+    resetMealPagination();
+    renderMarketplaceMeals();
+  });
+}
+
+function exportFilteredMealsJSON() {
+  const meals = sortMeals(getFilteredMeals());
+  if (!meals.length) {
+    showToast('No meals match current filters to export.');
+    return;
+  }
+
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    filters: {
+      region: currentMealRegion,
+      healthTags: [...currentMealHealthTags],
+      search: currentMealSearch,
+      sort: currentMealSort,
+      maxCalories: Number.isFinite(currentMaxCalories) ? currentMaxCalories : null,
+      minProtein: currentMinProtein,
+      favoritesOnly,
+    },
+    totalMeals: meals.length,
+    meals,
+  };
+
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `dwm-meals-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+
+  showToast(`Exported ${meals.length} meals to JSON.`);
+}
+
+function initMealExport() {
+  const button = document.getElementById('meal-export-json');
+  if (!button) return;
+  button.addEventListener('click', exportFilteredMealsJSON);
+}
+
+function initMealSort() {
+  const select = document.getElementById('meal-sort');
+  if (!select) return;
+
+  select.addEventListener('change', () => {
+    currentMealSort = select.value || 'featured';
+    resetMealPagination();
+    renderMarketplaceMeals();
+  });
+}
+
+function initMealLoadMore() {
+  const button = document.getElementById('meal-load-more');
+  if (!button) return;
+
+  button.addEventListener('click', () => {
+    mealsVisibleCount += MEALS_PER_PAGE;
+    renderMarketplaceMeals();
+  });
+}
+
+function renderMarketplaceMeals() {
+  if (!document.getElementById('marketplace-meals')) return;
+
+  const meals = sortMeals(getFilteredMeals());
+  const visibleMeals = meals.slice(0, mealsVisibleCount);
+
+  renderFavoritesSection();
+  updateFavoritesToggleState();
+
+  renderMealCards(visibleMeals, 'marketplace-meals', { showDetails: true });
 
   const countEl = document.getElementById('meal-count');
   if (countEl) {
-    countEl.textContent = `${meals.length} meal${meals.length !== 1 ? 's' : ''} found`;
+    if (visibleMeals.length < meals.length) {
+      countEl.textContent = `${visibleMeals.length} of ${meals.length} meals shown`;
+    } else {
+      countEl.textContent = `${meals.length} meal${meals.length !== 1 ? 's' : ''} found`;
+    }
+  }
+
+  const paginationWrap = document.getElementById('meal-pagination');
+  const loadMoreBtn = document.getElementById('meal-load-more');
+  if (paginationWrap && loadMoreBtn) {
+    const remaining = meals.length - visibleMeals.length;
+    if (remaining > 0) {
+      paginationWrap.style.display = 'flex';
+      loadMoreBtn.disabled = false;
+      loadMoreBtn.textContent = `Load More Meals (${remaining} left)`;
+    } else {
+      paginationWrap.style.display = meals.length > MEALS_PER_PAGE ? 'flex' : 'none';
+      loadMoreBtn.disabled = true;
+      loadMoreBtn.textContent = 'All meals loaded';
+    }
   }
 }
 
@@ -519,6 +1067,7 @@ function filterRegion(region, btn) {
   currentMealRegion = region;
   document.querySelectorAll('#region-filter .region-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  resetMealPagination();
   renderMarketplaceMeals();
 }
 
@@ -535,6 +1084,16 @@ function filterIngredients(region, btn) {
 
 function initMarketplace() {
   if (!document.getElementById('marketplace-meals')) return;
+  buildHealthFilterButtons();
+  syncHealthFilterButtonState();
+  initMealSearch();
+  initMealSort();
+  initNutritionFilters();
+  initFavoritesToggle();
+  initMealClearFilters();
+  initClearFavorites();
+  initMealExport();
+  initMealLoadMore();
   renderMarketplaceMeals();
   renderIngredientCards(INGREDIENTS, 'marketplace-ingredients');
 }

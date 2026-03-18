@@ -1393,6 +1393,245 @@ footer {
   font-weight: 600;
 }
 
+.meal-tools {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.meal-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.meal-nutrition-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.nutrition-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.nutrition-filter label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+.nutrition-filter label span {
+  color: var(--green-deep);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.nutrition-filter input[type='range'] {
+  width: 100%;
+  accent-color: var(--green-deep);
+}
+
+.health-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.health-filter-btn {
+  padding: 7px 14px;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--text-mid);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.health-filter-btn:hover,
+.health-filter-btn.active {
+  background: var(--green-deep);
+  border-color: var(--green-deep);
+  color: var(--white);
+}
+
+.meal-search-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.meal-sort-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.meal-search-wrap label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+.meal-sort-wrap label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+
+.meal-search-wrap input {
+  width: 100%;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0,0,0,0.14);
+  background: var(--white);
+  color: var(--text-dark);
+  padding: 0 14px;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  transition: var(--transition);
+}
+
+.meal-sort-wrap select {
+  width: 100%;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0,0,0,0.14);
+  background: var(--white);
+  color: var(--text-dark);
+  padding: 0 12px;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  transition: var(--transition);
+}
+
+.meal-search-wrap input:focus {
+  outline: none;
+  border-color: var(--green-light);
+  box-shadow: 0 0 0 3px rgba(20,90,62,0.12);
+}
+
+.meal-sort-wrap select:focus {
+  outline: none;
+  border-color: var(--green-light);
+  box-shadow: 0 0 0 3px rgba(20,90,62,0.12);
+}
+
+.meal-extra-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.meal-action-btn {
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--green-deep);
+  color: var(--white);
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.meal-action-btn:hover {
+  background: var(--green-light);
+}
+
+.meal-action-btn.active {
+  background: var(--gold);
+  color: var(--green-deep);
+}
+
+.meal-action-btn.ghost {
+  background: transparent;
+  color: var(--green-deep);
+  border: 1.5px solid rgba(20,90,62,0.35);
+}
+
+.meal-action-btn.ghost:hover {
+  border-color: var(--green-deep);
+  background: rgba(20,90,62,0.06);
+}
+
+.favorites-section {
+  margin-bottom: 24px;
+  border: 1px solid rgba(20,90,62,0.14);
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, rgba(232,245,239,0.7) 0%, rgba(255,255,255,0.94) 100%);
+  padding: 16px;
+}
+
+.favorites-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.favorites-section-head h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--green-deep);
+}
+
+.favorites-grid {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.meal-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.meal-load-more {
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--green-deep);
+  color: var(--white);
+  padding: 11px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.meal-load-more:hover:not(:disabled) {
+  background: var(--green-light);
+  transform: translateY(-1px);
+}
+
+.meal-load-more:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* ============ CART SIDEBAR ============ */
 .cart-overlay {
   position: fixed;
@@ -1550,6 +1789,11 @@ footer {
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .hero-ctas { flex-direction: column; max-width: 280px; }
   .form-card { padding: 32px 24px; }
+  .meal-tools { grid-template-columns: 1fr; }
+  .meal-inputs { grid-template-columns: 1fr; }
+  .meal-nutrition-filters { grid-template-columns: 1fr; }
+  .meal-extra-actions { justify-content: flex-start; }
+  .favorites-section-head { flex-direction: column; align-items: flex-start; }
 }
 
 @media (max-width: 480px) {
@@ -1895,6 +2139,8 @@ footer {
   display: flex;
   gap: 8px;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .btn-view-details {
@@ -1914,6 +2160,33 @@ footer {
 .btn-view-details:hover {
   background: var(--green-deep);
   color: var(--white);
+}
+
+.btn-favorite {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(20,90,62,0.35);
+  background: var(--white);
+  color: var(--green-deep);
+  font-size: 16px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-favorite:hover {
+  background: var(--green-pale);
+  transform: translateY(-1px);
+}
+
+.btn-favorite.active {
+  background: #fde8ec;
+  border-color: #f39aac;
+  color: #b93a58;
 }
 
 @media (max-width: 640px) {

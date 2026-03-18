@@ -178,7 +178,57 @@
       <div style="font-size:13px;color:var(--text-light);" id="meal-count"></div>
     </div>
 
+    <div class="meal-tools">
+      <div class="health-filter" id="health-filter"></div>
+      <div class="meal-inputs">
+        <div class="meal-search-wrap">
+          <label for="meal-search">Search Meals</label>
+          <input id="meal-search" type="search" placeholder="Search by meal, country, region, or ingredient" />
+        </div>
+        <div class="meal-sort-wrap">
+          <label for="meal-sort">Sort Meals</label>
+          <select id="meal-sort">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="calories-asc">Calories: Low to High</option>
+            <option value="calories-desc">Calories: High to Low</option>
+            <option value="protein-desc">Protein: High to Low</option>
+            <option value="name-asc">Name: A to Z</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="meal-nutrition-filters">
+      <div class="nutrition-filter">
+        <label for="meal-calories-range">Max Calories: <span id="meal-calories-value">Any</span></label>
+        <input id="meal-calories-range" type="range" min="0" max="1000" step="10" value="1000" />
+      </div>
+      <div class="nutrition-filter">
+        <label for="meal-protein-range">Min Protein: <span id="meal-protein-value">0g+</span></label>
+        <input id="meal-protein-range" type="range" min="0" max="60" step="1" value="0" />
+      </div>
+      <div class="meal-extra-actions">
+        <button id="meal-favorites-toggle" class="meal-action-btn">Show Favorites Only</button>
+        <button id="meal-clear-filters" class="meal-action-btn ghost">Clear Filters</button>
+        <button id="meal-export-json" class="meal-action-btn ghost">Export Filtered JSON</button>
+      </div>
+    </div>
+
+    <section class="favorites-section" id="favorites-section" style="display:none;">
+      <div class="favorites-section-head">
+        <h3>Saved Favorites</h3>
+        <button id="meal-clear-favorites" class="meal-action-btn ghost">Clear Saved</button>
+      </div>
+      <div class="meals-grid favorites-grid" id="meal-favorites-grid"></div>
+    </section>
+
     <div class="meals-grid" id="marketplace-meals"></div>
+
+    <div class="meal-pagination" id="meal-pagination">
+      <button id="meal-load-more" class="meal-load-more">Load More Meals</button>
+    </div>
   </div>
 
   <div id="panel-ingredients" style="display:none;">
