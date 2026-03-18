@@ -4,30 +4,76 @@
 // ============================================
 
 const MEALS = [
-  // West Africa
-  { id: 'w1', region: 'West Africa', name: 'Jollof Rice & Chicken', desc: 'Smoky party rice with marinated grilled chicken, ripe plantain, and coleslaw.', price: 14.99, emoji: '🍛', tag: 'bestseller' },
-  { id: 'w2', region: 'West Africa', name: 'Egusi Soup & Fufu', desc: 'Ground melon seed soup with assorted meat and pounded yam.', price: 16.50, emoji: '🥘', tag: '' },
-  { id: 'w3', region: 'West Africa', name: 'Suya Platter', desc: 'Spiced beef skewers with onions, tomatoes, and suya spice dip.', price: 12.00, emoji: '🍢', tag: 'popular' },
-  { id: 'w4', region: 'West Africa', name: 'Kelewele', desc: 'Ghanaian spiced fried plantains with ginger, chili, and cloves.', price: 8.50, emoji: '🍌', tag: '' },
-  { id: 'w5', region: 'West Africa', name: 'Thieboudienne', desc: "Senegal's national dish — rice and fish in rich tomato sauce with vegetables.", price: 17.00, emoji: '🐟', tag: 'chef special' },
-
-  // East Africa
-  { id: 'e1', region: 'East Africa', name: 'Nyama Choma', desc: 'Kenyan charcoal-roasted goat meat with kachumbari fresh salsa.', price: 18.00, emoji: '🍖', tag: 'popular' },
-  { id: 'e2', region: 'East Africa', name: 'Injera & Doro Wat', desc: 'Ethiopian spongy flatbread with spiced chicken stew (berbere).', price: 15.50, emoji: '🫓', tag: 'bestseller' },
-  { id: 'e3', region: 'East Africa', name: 'Pilau Rice', desc: 'Kenyan spiced pilau with whole spices, tender beef, and caramelised onions.', price: 13.00, emoji: '🍚', tag: '' },
-  { id: 'e4', region: 'East Africa', name: 'Ugali & Sukuma Wiki', desc: 'East African maize porridge with collard greens and fried eggs.', price: 9.00, emoji: '🌽', tag: '' },
-
-  // Central Africa
-  { id: 'c1', region: 'Central Africa', name: 'Poulet DG', desc: "Cameroon's Director General chicken — fried plantains, vegetables, tomato sauce.", price: 16.00, emoji: '🍗', tag: 'chef special' },
-  { id: 'c2', region: 'Central Africa', name: 'Saka Saka', desc: 'Congolese cassava leaf stew cooked with palm oil and smoked fish.', price: 14.00, emoji: '🥬', tag: '' },
-
-  // Southern Africa
-  { id: 's1', region: 'Southern Africa', name: 'Braai Platter', desc: 'South African barbecue — boerewors, ribs, corn, chakalaka relish.', price: 22.00, emoji: '🥩', tag: 'popular' },
-  { id: 's2', region: 'Southern Africa', name: 'Sadza & Nyama', desc: 'Zimbabwean white maize meal with slow-cooked beef and tomato gravy.', price: 11.50, emoji: '🍲', tag: '' },
-
-  // North Africa
-  { id: 'n1', region: 'North Africa', name: 'Lamb Tagine', desc: 'Moroccan slow-cooked lamb with preserved lemons, olives, and harissa.', price: 19.00, emoji: '🫕', tag: 'bestseller' },
-  { id: 'n2', region: 'North Africa', name: 'Couscous Royale', desc: 'Fluffy semolina with seven vegetables, merguez, and ras el hanout broth.', price: 16.50, emoji: '🍽️', tag: '' },
+  { id: 'm1', region: 'West Africa', country: 'Nigeria', emoji: '🇳🇬', name: 'Jollof Rice', desc: 'Spiced tomato rice cooked with peppers, onions, and served with protein.', ingredients: ['Rice', 'Tomatoes', 'Red pepper', 'Onions', 'Vegetable oil', 'Chicken'], nutrition: { calories: 550, protein: 22, carbs: 75, fats: 18 }, ingredientNutrition: ['Tomatoes -> Vitamin C (boosts immunity)', 'Rice -> Carbs (energy)', 'Chicken -> Protein (muscle repair)'], healthTags: ['Heart-healthy', 'Energy-rich'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm2', region: 'West Africa', country: 'Nigeria', emoji: '🇳🇬', name: 'Efo Riro', desc: 'Spinach-based vegetable soup rich in flavor.', ingredients: ['Spinach', 'Palm oil', 'Beef', 'Pepper', 'Onions'], nutrition: { calories: 450, protein: 25, carbs: 20, fats: 28 }, ingredientNutrition: ['Spinach -> Iron (prevents anaemia)', 'Beef -> Protein + Iron', 'Palm oil -> Vitamin A'], healthTags: ['High Iron', 'Pregnancy-friendly'], price: 4200, currency: 'RWF', tag: '' },
+  { id: 'm3', region: 'West Africa', country: 'Ghana', emoji: '🇬🇭', name: 'Waakye', desc: 'Rice and beans cooked with millet leaves.', ingredients: ['Rice', 'Beans', 'Millet leaves', 'Oil'], nutrition: { calories: 520, protein: 18, carbs: 80, fats: 12 }, ingredientNutrition: ['Beans -> Protein + Fiber', 'Rice -> Energy', 'Millet leaves -> Antioxidants'], healthTags: ['Diabetes-friendly', 'High Fiber'], price: 4300, currency: 'RWF', tag: '' },
+  { id: 'm4', region: 'East Africa', country: 'Rwanda', emoji: '🇷🇼', name: 'Agatogo', desc: 'Plantain stew with vegetables and meat.', ingredients: ['Plantain', 'Tomatoes', 'Onions', 'Beef'], nutrition: { calories: 480, protein: 20, carbs: 65, fats: 15 }, ingredientNutrition: ['Plantain -> Potassium (heart health)', 'Beef -> Protein', 'Tomatoes -> Antioxidants'], healthTags: ['Heart-healthy'], price: 4000, currency: 'RWF', tag: '' },
+  { id: 'm5', region: 'East Africa', country: 'Kenya', emoji: '🇰🇪', name: 'Ugali & Sukuma Wiki', desc: 'Maize meal with sauteed kale.', ingredients: ['Maize flour', 'Kale', 'Onions', 'Oil'], nutrition: { calories: 400, protein: 12, carbs: 70, fats: 10 }, ingredientNutrition: ['Kale -> Iron + Calcium', 'Maize -> Energy'], healthTags: ['High Iron', 'Weight-loss friendly'], price: 3500, currency: 'RWF', tag: '' },
+  { id: 'm6', region: 'East Africa', country: 'Ethiopia', emoji: '🇪🇹', name: 'Injera & Doro Wat', desc: 'Fermented flatbread served with spicy chicken stew.', ingredients: ['Teff flour', 'Chicken', 'Spices'], nutrition: { calories: 600, protein: 30, carbs: 70, fats: 20 }, ingredientNutrition: ['Teff -> Iron', 'Chicken -> Protein'], healthTags: ['High Iron'], price: 5000, currency: 'RWF', tag: '' },
+  { id: 'm7', region: 'Southern Africa', country: 'South Africa', emoji: '🇿🇦', name: 'Bunny Chow', desc: 'Bread filled with curry.', ingredients: ['Bread', 'Beans', 'Curry spices'], nutrition: { calories: 650, protein: 20, carbs: 85, fats: 22 }, ingredientNutrition: [], healthTags: ['Energy-rich'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm8', region: 'North Africa', country: 'Egypt', emoji: '🇪🇬', name: 'Koshari', desc: 'Rice, lentils, pasta mix with tomato sauce.', ingredients: ['Rice', 'Lentils', 'Pasta', 'Tomatoes'], nutrition: { calories: 580, protein: 22, carbs: 90, fats: 12 }, ingredientNutrition: [], healthTags: ['High Fiber', 'Diabetes-friendly'], price: 4200, currency: 'RWF', tag: '' },
+  { id: 'm9', region: 'West Africa', country: 'Nigeria', emoji: '🇳🇬', name: 'Moi Moi', desc: 'Steamed bean pudding.', ingredients: ['Beans', 'Pepper', 'Oil'], nutrition: { calories: 300, protein: 18, carbs: 30, fats: 12 }, ingredientNutrition: [], healthTags: ['Pregnancy-friendly', 'High Protein'], price: 3000, currency: 'RWF', tag: '' },
+  { id: 'm10', region: 'West Africa', country: 'Ghana', emoji: '🇬🇭', name: 'Banku & Tilapia', desc: 'Fermented corn dough with grilled fish.', ingredients: ['Corn dough', 'Tilapia'], nutrition: { calories: 520, protein: 28, carbs: 60, fats: 15 }, ingredientNutrition: [], healthTags: ['Heart-healthy'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm11', region: 'East Africa', country: 'Rwanda', emoji: '🇷🇼', name: 'Isombe', desc: 'Cassava leaves cooked with peanut paste.', ingredients: ['Cassava leaves', 'Peanuts'], nutrition: { calories: 430, protein: 18, carbs: 35, fats: 22 }, ingredientNutrition: [], healthTags: ['High Iron'], price: 3800, currency: 'RWF', tag: '' },
+  { id: 'm12', region: 'East Africa', country: 'Kenya', emoji: '🇰🇪', name: 'Nyama Choma', desc: 'Grilled meat.', ingredients: ['Goat meat', 'Spices'], nutrition: { calories: 600, protein: 35, carbs: 5, fats: 40 }, ingredientNutrition: [], healthTags: ['High Protein'], price: 5000, currency: 'RWF', tag: '' },
+  { id: 'm13', region: 'West Africa', country: 'Nigeria', emoji: '🇳🇬', name: 'Egusi Soup', desc: 'Melon seed soup with vegetables.', ingredients: ['Egusi', 'Spinach', 'Meat'], nutrition: { calories: 550, protein: 28, carbs: 20, fats: 35 }, ingredientNutrition: [], healthTags: ['High Protein'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm14', region: 'East Africa', country: 'Ethiopia', emoji: '🇪🇹', name: 'Shiro', desc: 'Chickpea stew.', ingredients: ['Chickpeas', 'Spices'], nutrition: { calories: 400, protein: 20, carbs: 50, fats: 12 }, ingredientNutrition: [], healthTags: ['Diabetes-friendly'], price: 3500, currency: 'RWF', tag: '' },
+  { id: 'm15', region: 'North Africa', country: 'Morocco', emoji: '🇲🇦', name: 'Tagine', desc: 'Slow-cooked stew with meat and vegetables.', ingredients: ['Chicken', 'Vegetables', 'Spices'], nutrition: { calories: 500, protein: 30, carbs: 40, fats: 20 }, ingredientNutrition: [], healthTags: ['Heart-healthy'], price: 4800, currency: 'RWF', tag: '' },
+  { id: 'm16', region: 'West Africa', country: 'Nigeria', emoji: '🇳🇬', name: 'Pepper Soup', desc: 'Light spicy broth.', ingredients: ['Fish', 'Spices'], nutrition: { calories: 250, protein: 25, carbs: 5, fats: 10 }, ingredientNutrition: [], healthTags: ['Weight-loss friendly'], price: 3200, currency: 'RWF', tag: '' },
+  { id: 'm17', region: 'West Africa', country: 'Ghana', emoji: '🇬🇭', name: 'Fufu & Light Soup', desc: 'Cassava dough with soup.', ingredients: ['Cassava', 'Tomatoes', 'Fish'], nutrition: { calories: 600, protein: 25, carbs: 85, fats: 15 }, ingredientNutrition: [], healthTags: ['Energy-rich'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm18', region: 'East Africa', country: 'Kenya', emoji: '🇰🇪', name: 'Pilau', desc: 'Spiced rice dish.', ingredients: ['Rice', 'Beef', 'Spices', 'Onions'], nutrition: { calories: 550, protein: 20, carbs: 75, fats: 18 }, ingredientNutrition: [], healthTags: ['Energy-rich'], price: 4200, currency: 'RWF', tag: '' },
+  { id: 'm19', region: 'Southern Africa', country: 'South Africa', emoji: '🇿🇦', name: 'Pap & Chakalaka', desc: 'Smooth maize porridge served with a spicy vegetable relish.', ingredients: ['Maize meal', 'Tomatoes', 'Onions', 'Beans', 'Carrots', 'Chili', 'Oil'], nutrition: { calories: 480, protein: 14, carbs: 75, fats: 12 }, ingredientNutrition: ['Maize -> Carbohydrates (energy source)', 'Beans -> Fiber + Protein (blood sugar control)', 'Carrots -> Vitamin A (immune support)', 'Tomatoes -> Antioxidants'], healthTags: ['High Fiber', 'Diabetes-friendly'], price: 3500, currency: 'RWF', tag: '' },
+  { id: 'm20', region: 'North Africa', country: 'Egypt', emoji: '🇪🇬', name: 'Ful Medames', desc: 'Slow-cooked fava beans seasoned with olive oil, garlic, and lemon.', ingredients: ['Fava beans', 'Olive oil', 'Garlic', 'Lemon'], nutrition: { calories: 420, protein: 20, carbs: 55, fats: 14 }, ingredientNutrition: ['Fava beans -> Fiber (blood sugar regulation)', 'Olive oil -> Healthy fats (heart health)', 'Garlic -> Immunity support'], healthTags: ['Diabetes-friendly', 'Heart-healthy'], price: 3500, currency: 'RWF', tag: '' },
+  { id: 'm21', region: 'West Africa', country: 'Nigeria', emoji: '🇳🇬', name: 'Okra Soup', desc: 'A rich slimy vegetable soup known for digestive and blood sugar benefits.', ingredients: ['Okra', 'Palm oil', 'Fish', 'Pepper', 'Onions'], nutrition: { calories: 420, protein: 22, carbs: 25, fats: 24 }, ingredientNutrition: ['Okra -> Soluble fiber (controls blood sugar)', 'Fish -> Protein + Omega-3 (heart health)', 'Palm oil -> Vitamin A'], healthTags: ['High Fiber', 'Diabetes-friendly'], price: 3500, currency: 'RWF', tag: '' },
+  { id: 'm22', region: 'West Africa', country: 'Ghana', emoji: '🇬🇭', name: 'Kenkey', desc: 'Fermented corn dough often served with fish and spicy pepper sauce.', ingredients: ['Corn dough', 'Fish', 'Pepper sauce'], nutrition: { calories: 500, protein: 24, carbs: 65, fats: 14 }, ingredientNutrition: ['Corn -> Energy (carbohydrates)', 'Fish -> Protein + Omega-3', 'Fermentation -> Gut health'], healthTags: ['Energy-rich', 'Heart-healthy'], price: 4000, currency: 'RWF', tag: '' },
+  { id: 'm23', region: 'East Africa', country: 'Rwanda', emoji: '🇷🇼', name: 'Brochettes', desc: 'Grilled skewered meat, widely enjoyed as street food in Rwanda.', ingredients: ['Beef', 'Onions', 'Spices'], nutrition: { calories: 550, protein: 35, carbs: 5, fats: 38 }, ingredientNutrition: ['Beef -> Iron (prevents anaemia)', 'Onions -> Antioxidants'], healthTags: ['High Protein', 'High Iron'], price: 3000, currency: 'RWF', tag: '' },
+  { id: 'm24', region: 'East Africa', country: 'Ethiopia', emoji: '🇪🇹', name: 'Kitfo', desc: 'Minced raw beef mixed with spices and clarified butter.', ingredients: ['Beef', 'Butter', 'Spices'], nutrition: { calories: 600, protein: 40, carbs: 2, fats: 45 }, ingredientNutrition: ['Beef -> Iron (supports red blood cells)', 'Butter -> Healthy fats (energy)'], healthTags: ['High Iron', 'High Protein'], price: 5500, currency: 'RWF', tag: '' },
+  { id: 'm25', region: 'North Africa', country: 'Morocco', emoji: '🇲🇦', name: 'Couscous', desc: 'Steamed semolina grains served with vegetables and meat.', ingredients: ['Semolina', 'Carrots', 'Zucchini', 'Chickpeas', 'Chicken'], nutrition: { calories: 520, protein: 25, carbs: 70, fats: 15 }, ingredientNutrition: ['Chickpeas -> Protein + Fiber', 'Vegetables -> Vitamins + antioxidants', 'Chicken -> Lean protein'], healthTags: ['Heart-healthy', 'Balanced diet'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm26', region: 'West Africa', country: 'Nigeria', emoji: '🇳🇬', name: 'Banga Soup', desc: 'A rich palm fruit soup popular in southern Nigeria.', ingredients: ['Palm fruit extract', 'Fish', 'Spices'], nutrition: { calories: 480, protein: 25, carbs: 18, fats: 32 }, ingredientNutrition: ['Palm fruit -> Vitamin A (eye health)', 'Fish -> Omega-3 (heart health)'], healthTags: ['High Iron', 'Heart-healthy'], price: 4000, currency: 'RWF', tag: '' },
+  { id: 'm27', region: 'East Africa', country: 'Kenya', emoji: '🇰🇪', name: 'Githeri', desc: 'A nutritious mix of boiled maize and beans.', ingredients: ['Maize', 'Beans'], nutrition: { calories: 450, protein: 20, carbs: 65, fats: 10 }, ingredientNutrition: ['Beans -> Fiber (blood sugar control)', 'Maize -> Energy'], healthTags: ['Diabetes-friendly', 'High Fiber'], price: 3000, currency: 'RWF', tag: '' },
+  { id: 'm28', region: 'Southern Africa', country: 'South Africa', emoji: '🇿🇦', name: 'Boerewors', desc: 'Traditional South African sausage made from beef and spices.', ingredients: ['Beef', 'Spices'], nutrition: { calories: 650, protein: 30, carbs: 3, fats: 50 }, ingredientNutrition: ['Beef -> Protein + Iron'], healthTags: ['High Protein'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm29', region: 'North Africa', country: 'Egypt', emoji: '🇪🇬', name: 'Molokhia', desc: 'A leafy green stew cooked with garlic and broth.', ingredients: ['Molokhia leaves', 'Garlic', 'Chicken broth'], nutrition: { calories: 400, protein: 22, carbs: 20, fats: 18 }, ingredientNutrition: ['Molokhia -> Iron + Calcium', 'Garlic -> Immunity boost'], healthTags: ['High Iron', 'Pregnancy-friendly'], price: 3800, currency: 'RWF', tag: '' },
+  { id: 'm30', region: 'West Africa', country: 'Nigeria', emoji: '🇳🇬', name: 'Ofada Rice & Sauce', desc: 'Local Nigerian rice served with spicy pepper sauce.', ingredients: ['Ofada rice', 'Palm oil', 'Pepper', 'Assorted meat'], nutrition: { calories: 580, protein: 20, carbs: 75, fats: 22 }, ingredientNutrition: ['Rice -> Energy', 'Pepper -> Metabolism boost', 'Meat -> Protein'], healthTags: ['Energy-rich', 'High Protein'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm31', region: 'West Africa', country: 'Nigeria', emoji: '🇳🇬', name: 'Okra Soup (Classic)', desc: 'Slimy vegetable soup rich in fiber and micronutrients.', ingredients: ['Okra', 'Palm oil', 'Fish', 'Pepper', 'Onions'], nutrition: { calories: 420, protein: 22, carbs: 25, fats: 24 }, ingredientNutrition: ['Okra -> Fiber (aids digestion, regulates blood sugar)', 'Fish -> Protein + Omega-3', 'Palm oil -> Vitamin A'], healthTags: ['High Fiber', 'Diabetes-friendly'], price: 3500, currency: 'RWF', tag: '' },
+  { id: 'm32', region: 'West Africa', country: 'Ghana', emoji: '🇬🇭', name: 'Kenkey & Fish', desc: 'Fermented corn dough served with grilled fish.', ingredients: ['Corn dough', 'Fish', 'Pepper sauce'], nutrition: { calories: 500, protein: 25, carbs: 65, fats: 14 }, ingredientNutrition: ['Corn -> Energy', 'Fish -> Protein + Heart health'], healthTags: ['Heart-healthy'], price: 4000, currency: 'RWF', tag: '' },
+  { id: 'm33', region: 'East Africa', country: 'Rwanda', emoji: '🇷🇼', name: 'Brochettes (Street)', desc: 'Grilled meat skewers popular across Rwanda.', ingredients: ['Beef', 'Onions', 'Spices'], nutrition: { calories: 550, protein: 35, carbs: 5, fats: 38 }, ingredientNutrition: ['Beef -> Iron + Protein', 'Onions -> Antioxidants'], healthTags: ['High Protein', 'High Iron'], price: 3000, currency: 'RWF', tag: '' },
+  { id: 'm34', region: 'East Africa', country: 'Ethiopia', emoji: '🇪🇹', name: 'Kitfo (Traditional)', desc: 'Minced raw beef with spices and butter.', ingredients: ['Beef', 'Butter', 'Spices'], nutrition: { calories: 600, protein: 40, carbs: 2, fats: 45 }, ingredientNutrition: ['Beef -> Iron (prevents anaemia)', 'Butter -> Healthy fats'], healthTags: ['High Iron'], price: 5500, currency: 'RWF', tag: '' },
+  { id: 'm35', region: 'North Africa', country: 'Morocco', emoji: '🇲🇦', name: 'Couscous (Steamed)', desc: 'Steamed semolina served with vegetables and meat.', ingredients: ['Semolina', 'Vegetables', 'Chicken'], nutrition: { calories: 520, protein: 25, carbs: 70, fats: 15 }, ingredientNutrition: ['Vegetables -> Vitamins', 'Chicken -> Protein'], healthTags: ['Heart-healthy'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm36', region: 'West Africa', country: 'Nigeria', emoji: '🇳🇬', name: 'Banga Soup (Palm Fruit)', desc: 'Palm fruit soup rich in flavor.', ingredients: ['Palm fruit', 'Fish', 'Spices'], nutrition: { calories: 480, protein: 25, carbs: 18, fats: 32 }, ingredientNutrition: ['Palm fruit -> Vitamin A', 'Fish -> Omega-3'], healthTags: ['High Iron'], price: 4000, currency: 'RWF', tag: '' },
+  { id: 'm37', region: 'East Africa', country: 'Kenya', emoji: '🇰🇪', name: 'Githeri (Maize & Beans)', desc: 'Maize and beans mix.', ingredients: ['Maize', 'Beans'], nutrition: { calories: 450, protein: 20, carbs: 65, fats: 10 }, ingredientNutrition: ['Beans -> Fiber + Protein', 'Maize -> Energy'], healthTags: ['Diabetes-friendly'], price: 3000, currency: 'RWF', tag: '' },
+  { id: 'm38', region: 'Southern Africa', country: 'South Africa', emoji: '🇿🇦', name: 'Boerewors (Traditional)', desc: 'Traditional sausage.', ingredients: ['Beef', 'Spices'], nutrition: { calories: 650, protein: 30, carbs: 3, fats: 50 }, ingredientNutrition: ['Beef -> Protein + Iron'], healthTags: ['High Protein'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm39', region: 'North Africa', country: 'Egypt', emoji: '🇪🇬', name: 'Molokhia (Leafy Green Stew)', desc: 'Leafy green stew.', ingredients: ['Molokhia leaves', 'Garlic', 'Chicken'], nutrition: { calories: 400, protein: 22, carbs: 20, fats: 18 }, ingredientNutrition: ['Leaves -> Iron', 'Garlic -> Immunity'], healthTags: ['High Iron'], price: 3800, currency: 'RWF', tag: '' },
+  { id: 'm40', region: 'West Africa', country: 'Nigeria', emoji: '🇳🇬', name: 'Ofada Rice & Sauce (Local)', desc: 'Local rice with spicy sauce.', ingredients: ['Ofada rice', 'Pepper', 'Oil'], nutrition: { calories: 580, protein: 18, carbs: 75, fats: 22 }, ingredientNutrition: ['Rice -> Energy', 'Pepper -> Metabolism'], healthTags: ['Energy-rich'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm41', region: 'East Africa', country: 'Uganda', emoji: '🇺🇬', name: 'Matoke', desc: 'Steamed green plantains cooked with vegetables and optional meat.', ingredients: ['Green plantain', 'Tomatoes', 'Onions', 'Leafy vegetables', 'Beef'], nutrition: { calories: 480, protein: 15, carbs: 70, fats: 12 }, ingredientNutrition: ['Plantain -> Potassium (supports heart function)', 'Vegetables -> Vitamins (immune support)', 'Beef -> Protein + Iron'], healthTags: ['Heart-healthy', 'Pregnancy-friendly'], price: 3500, currency: 'RWF', tag: '' },
+  { id: 'm42', region: 'East Africa', country: 'Tanzania', emoji: '🇹🇿', name: 'Zanzibar Pilau', desc: 'A fragrant spiced rice dish cooked with meat and aromatic spices.', ingredients: ['Rice', 'Beef/chicken', 'Cloves', 'Cinnamon', 'Cumin', 'Onions'], nutrition: { calories: 560, protein: 22, carbs: 75, fats: 18 }, ingredientNutrition: ['Spices -> Anti-inflammatory', 'Meat -> Protein', 'Rice -> Energy'], healthTags: ['Energy-rich', 'Heart-healthy'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm43', region: 'West Africa', country: 'Senegal', emoji: '🇸🇳', name: 'Thieboudienne', desc: 'Rice cooked with fish and vegetables.', ingredients: ['Rice', 'Fish', 'Carrots', 'Cabbage', 'Tomatoes'], nutrition: { calories: 600, protein: 30, carbs: 80, fats: 18 }, ingredientNutrition: ['Fish -> Omega-3 (heart health)', 'Vegetables -> Fiber + vitamins'], healthTags: ['Heart-healthy', 'Balanced diet'], price: 5000, currency: 'RWF', tag: '' },
+  { id: 'm44', region: 'Central Africa', country: 'Cameroon', emoji: '🇨🇲', name: 'Ndole', desc: 'A rich stew made with bitterleaf, peanuts, and meat or fish.', ingredients: ['Bitterleaf', 'Peanuts', 'Beef/fish', 'Onions'], nutrition: { calories: 520, protein: 28, carbs: 25, fats: 30 }, ingredientNutrition: ['Bitterleaf -> Iron (anaemia prevention)', 'Peanuts -> Healthy fats + protein'], healthTags: ['High Iron', 'Pregnancy-friendly'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm45', region: 'West Africa', country: "Cote d'Ivoire", emoji: '🇨🇮', name: 'Attieke & Fish', desc: 'Fermented cassava couscous served with grilled fish.', ingredients: ['Cassava', 'Fish', 'Onions', 'Tomatoes'], nutrition: { calories: 500, protein: 25, carbs: 65, fats: 15 }, ingredientNutrition: ['Cassava -> Energy', 'Fish -> Omega-3'], healthTags: ['Heart-healthy'], price: 4000, currency: 'RWF', tag: '' },
+  { id: 'm46', region: 'West Africa', country: 'Mali', emoji: '🇲🇱', name: 'Maafe', desc: 'A peanut-based stew with meat and vegetables.', ingredients: ['Peanuts', 'Beef/chicken', 'Tomatoes', 'Onions'], nutrition: { calories: 600, protein: 28, carbs: 40, fats: 35 }, ingredientNutrition: ['Peanuts -> Protein + healthy fats', 'Meat -> Muscle repair'], healthTags: ['High Protein', 'Energy-rich'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm47', region: 'Southern Africa', country: 'Zambia', emoji: '🇿🇲', name: 'Nshima', desc: 'Thick maize porridge served with vegetables or meat.', ingredients: ['Maize flour', 'Vegetables', 'Meat'], nutrition: { calories: 450, protein: 14, carbs: 75, fats: 10 }, ingredientNutrition: ['Maize -> Energy', 'Vegetables -> Fiber'], healthTags: ['Energy-rich'], price: 3000, currency: 'RWF', tag: '' },
+  { id: 'm48', region: 'Southern Africa', country: 'Botswana', emoji: '🇧🇼', name: 'Seswaa', desc: 'Slow-cooked shredded beef traditionally served with maize meal.', ingredients: ['Beef', 'Salt', 'Onions'], nutrition: { calories: 550, protein: 35, carbs: 5, fats: 38 }, ingredientNutrition: ['Beef -> Iron + Protein'], healthTags: ['High Protein', 'High Iron'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm49', region: 'Southern Africa', country: 'Namibia', emoji: '🇳🇦', name: 'Kapana', desc: 'Street-style grilled meat served with spicy seasoning.', ingredients: ['Beef', 'Spices', 'Chili'], nutrition: { calories: 500, protein: 32, carbs: 5, fats: 35 }, ingredientNutrition: ['Beef -> Protein', 'Chili -> Boosts metabolism'], healthTags: ['High Protein'], price: 4000, currency: 'RWF', tag: '' },
+  { id: 'm50', region: 'East Africa', country: 'Sudan', emoji: '🇸🇩', name: 'Ful Sudanese', desc: 'A variation of stewed fava beans served with oil and spices.', ingredients: ['Fava beans', 'Oil', 'Garlic'], nutrition: { calories: 400, protein: 18, carbs: 50, fats: 12 }, ingredientNutrition: ['Beans -> Fiber (blood sugar control)'], healthTags: ['Diabetes-friendly'], price: 3000, currency: 'RWF', tag: '' },
+  { id: 'm51', region: 'North Africa', country: 'Algeria', emoji: '🇩🇿', name: 'Chakchouka', desc: 'Tomato and pepper stew with eggs.', ingredients: ['Tomatoes', 'Peppers', 'Eggs', 'Onions'], nutrition: { calories: 350, protein: 18, carbs: 25, fats: 18 }, ingredientNutrition: ['Eggs -> Protein', 'Tomatoes -> Antioxidants'], healthTags: ['Heart-healthy'], price: 3500, currency: 'RWF', tag: '' },
+  { id: 'm52', region: 'North Africa', country: 'Tunisia', emoji: '🇹🇳', name: 'Brik', desc: 'Crispy pastry filled with egg and tuna.', ingredients: ['Pastry', 'Egg', 'Tuna'], nutrition: { calories: 450, protein: 20, carbs: 35, fats: 25 }, ingredientNutrition: ['Tuna -> Omega-3', 'Egg -> Protein'], healthTags: ['Energy-rich'], price: 3500, currency: 'RWF', tag: '' },
+  { id: 'm53', region: 'Southern Africa', country: 'Madagascar', emoji: '🇲🇬', name: 'Romazava', desc: 'A traditional Malagasy meat and leafy greens stew.', ingredients: ['Beef', 'Leafy greens', 'Onions'], nutrition: { calories: 420, protein: 26, carbs: 20, fats: 22 }, ingredientNutrition: ['Greens -> Iron', 'Beef -> Protein'], healthTags: ['High Iron'], price: 3800, currency: 'RWF', tag: '' },
+  { id: 'm54', region: 'Southern Africa', country: 'Mozambique', emoji: '🇲🇿', name: 'Piri Piri Chicken', desc: 'Grilled chicken marinated in spicy chili sauce.', ingredients: ['Chicken', 'Chili', 'Garlic'], nutrition: { calories: 550, protein: 35, carbs: 5, fats: 38 }, ingredientNutrition: [], healthTags: ['High Protein'], price: 5000, currency: 'RWF', tag: '' },
+  { id: 'm55', region: 'Southern Africa', country: 'Angola', emoji: '🇦🇴', name: 'Muamba de Galinha', desc: 'Chicken stew cooked in palm oil with vegetables.', ingredients: ['Chicken', 'Palm oil', 'Okra'], nutrition: { calories: 600, protein: 30, carbs: 20, fats: 40 }, ingredientNutrition: [], healthTags: ['High Iron'], price: 5000, currency: 'RWF', tag: '' },
+  { id: 'm56', region: 'East Africa', country: 'Eritrea', emoji: '🇪🇷', name: 'Zigni', desc: 'Spicy beef stew served with flatbread.', ingredients: ['Beef', 'Spices', 'Onions'], nutrition: { calories: 580, protein: 32, carbs: 30, fats: 32 }, ingredientNutrition: [], healthTags: ['High Iron'], price: 4800, currency: 'RWF', tag: '' },
+  { id: 'm57', region: 'West Africa', country: 'Sierra Leone', emoji: '🇸🇱', name: 'Groundnut Soup', desc: 'Peanut-based soup with meat or fish.', ingredients: ['Peanuts', 'Meat', 'Tomatoes'], nutrition: { calories: 600, protein: 30, carbs: 35, fats: 40 }, ingredientNutrition: [], healthTags: ['High Protein'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm58', region: 'West Africa', country: 'Liberia', emoji: '🇱🇷', name: 'Palava Sauce', desc: 'Leafy vegetable stew with palm oil and protein.', ingredients: ['Leaves', 'Palm oil', 'Fish'], nutrition: { calories: 500, protein: 25, carbs: 25, fats: 30 }, ingredientNutrition: [], healthTags: ['High Iron'], price: 4000, currency: 'RWF', tag: '' },
+  { id: 'm59', region: 'West Africa', country: 'Gambia', emoji: '🇬🇲', name: 'Benachin', desc: 'One-pot rice dish with vegetables and meat.', ingredients: ['Rice', 'Vegetables', 'Meat'], nutrition: { calories: 550, protein: 25, carbs: 75, fats: 18 }, ingredientNutrition: [], healthTags: ['Energy-rich'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm60', region: 'Central Africa', country: 'DR Congo', emoji: '🇨🇩', name: 'Moambe Chicken', desc: 'Chicken cooked in palm nut sauce.', ingredients: ['Chicken', 'Palm nut sauce'], nutrition: { calories: 600, protein: 30, carbs: 20, fats: 40 }, ingredientNutrition: [], healthTags: ['High Protein'], price: 5000, currency: 'RWF', tag: '' },
+  { id: 'm61', region: 'Central Africa', country: 'Gabon', emoji: '🇬🇦', name: 'Nyembwe Chicken', desc: 'Chicken cooked in rich palm butter sauce.', ingredients: ['Chicken', 'Palm butter'], nutrition: { calories: 620, protein: 32, carbs: 18, fats: 42 }, ingredientNutrition: [], healthTags: ['High Iron'], price: 5200, currency: 'RWF', tag: '' },
+  { id: 'm62', region: 'North Africa', country: 'Libya', emoji: '🇱🇾', name: 'Bazin', desc: 'Barley dough served with meat sauce.', ingredients: ['Barley', 'Meat', 'Tomato sauce'], nutrition: { calories: 500, protein: 22, carbs: 65, fats: 15 }, ingredientNutrition: [], healthTags: ['Energy-rich'], price: 3800, currency: 'RWF', tag: '' },
+  { id: 'm63', region: 'North Africa', country: 'Mauritania', emoji: '🇲🇷', name: 'Mechoui', desc: 'Slow-roasted lamb dish.', ingredients: ['Lamb', 'Spices'], nutrition: { calories: 650, protein: 40, carbs: 5, fats: 50 }, ingredientNutrition: [], healthTags: ['High Protein'], price: 5500, currency: 'RWF', tag: '' },
+  { id: 'm64', region: 'North Africa', country: 'Egypt', emoji: '🇪🇬', name: 'Hawawshi', desc: 'Stuffed bread with spiced minced meat.', ingredients: ['Bread', 'Minced meat'], nutrition: { calories: 550, protein: 25, carbs: 60, fats: 22 }, ingredientNutrition: [], healthTags: ['Energy-rich'], price: 4500, currency: 'RWF', tag: '' },
+  { id: 'm65', region: 'Southern Africa', country: 'Zimbabwe', emoji: '🇿🇼', name: 'Sadza & Stew', desc: 'Maize meal served with meat or vegetable stew.', ingredients: ['Maize', 'Beef', 'Vegetables'], nutrition: { calories: 480, protein: 20, carbs: 70, fats: 12 }, ingredientNutrition: [], healthTags: ['Energy-rich'], price: 3500, currency: 'RWF', tag: '' },
+  { id: 'm66', region: 'Southern Africa', country: 'Lesotho', emoji: '🇱🇸', name: 'Motoho', desc: 'Fermented sorghum porridge.', ingredients: ['Sorghum'], nutrition: { calories: 350, protein: 10, carbs: 60, fats: 5 }, ingredientNutrition: ['Sorghum -> Gut health + fiber'], healthTags: ['Digestive-friendly'], price: 2500, currency: 'RWF', tag: '' },
+  { id: 'm67', region: 'Southern Africa', country: 'Eswatini', emoji: '🇸🇿', name: 'Sishwala', desc: 'Maize porridge served with meat.', ingredients: ['Maize', 'Meat'], nutrition: { calories: 450, protein: 18, carbs: 70, fats: 10 }, ingredientNutrition: [], healthTags: ['Energy-rich'], price: 3000, currency: 'RWF', tag: '' },
+  { id: 'm68', region: 'West Africa', country: 'Togo', emoji: '🇹🇬', name: 'Akume', desc: 'Fermented maize dough served with soup.', ingredients: ['Maize', 'Soup'], nutrition: { calories: 430, protein: 15, carbs: 70, fats: 8 }, ingredientNutrition: [], healthTags: ['Energy-rich'], price: 3000, currency: 'RWF', tag: '' },
+  { id: 'm69', region: 'West Africa', country: 'Benin', emoji: '🇧🇯', name: 'Amiwo', desc: 'Spiced maize dish cooked in tomato sauce.', ingredients: ['Maize', 'Tomatoes', 'Spices'], nutrition: { calories: 500, protein: 18, carbs: 75, fats: 15 }, ingredientNutrition: [], healthTags: ['Energy-rich'], price: 3500, currency: 'RWF', tag: '' },
+  { id: 'm70', region: 'West Africa', country: 'Niger', emoji: '🇳🇪', name: 'Dambou', desc: 'Couscous-like dish made from millet or wheat.', ingredients: ['Millet', 'Vegetables'], nutrition: { calories: 480, protein: 16, carbs: 70, fats: 12 }, ingredientNutrition: ['Millet -> Fiber (digestive health)'], healthTags: ['High Fiber'], price: 3500, currency: 'RWF', tag: '' },
 ];
 
 const INGREDIENTS = [
@@ -55,6 +101,13 @@ const TESTIMONIALS = [
   { text: "As a nutritionist, I recommend this platform constantly. The telenutrition sessions are professional and the meal data is excellent.", name: 'Dr. Kofi Asante', role: 'Clinical Nutritionist · London', emoji: '👨🏾‍⚕️', stars: 5 },
   { text: "I discovered ingredients I had not seen since leaving Senegal. The marketplace is a goldmine for the diaspora!", name: 'Mariama Bah', role: 'Chef & Entrepreneur · Paris', emoji: '🇫🇷', stars: 5 },
 ];
+
+function formatPrice(amount, currency = 'USD') {
+  if (currency === 'RWF') {
+    return `${Math.round(amount).toLocaleString()} RWF`;
+  }
+  return `$${Number(amount).toFixed(2)}`;
+}
 
 // ── Cart System ──────────────────────────────
 const Cart = {
@@ -91,8 +144,17 @@ const Cart = {
     Cart.save(items);
     Cart.renderSidebar();
   },
-  total() {
-    return Cart.get().reduce((sum, i) => sum + i.price * i.qty, 0);
+  total(currency = 'USD') {
+    return Cart.get()
+      .filter(i => (i.currency || 'USD') === currency)
+      .reduce((sum, i) => sum + i.price * i.qty, 0);
+  },
+  totals() {
+    return Cart.get().reduce((map, item) => {
+      const currency = item.currency || 'USD';
+      map[currency] = (map[currency] || 0) + item.price * item.qty;
+      return map;
+    }, {});
   },
   count() {
     return Cart.get().reduce((sum, i) => sum + i.qty, 0);
@@ -115,7 +177,7 @@ const Cart = {
         Your cart is empty.<br>Explore our marketplace!
       </div>`;
       const totalEmpty = document.getElementById('cart-total-amount');
-      if (totalEmpty) totalEmpty.textContent = '$0.00';
+      if (totalEmpty) totalEmpty.textContent = formatPrice(0);
       return;
     }
 
@@ -124,7 +186,7 @@ const Cart = {
         <div class="cart-item-img">${item.emoji || '🍲'}</div>
         <div class="cart-item-info">
           <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
+          <div class="cart-item-price">${formatPrice(item.price * item.qty, item.currency || 'USD')}</div>
         </div>
         <div class="cart-item-qty">
           <button class="qty-btn" onclick="Cart.changeQty('${item.id}', -1)">−</button>
@@ -135,7 +197,13 @@ const Cart = {
     `).join('');
 
     const total = document.getElementById('cart-total-amount');
-    if (total) total.textContent = `$${Cart.total().toFixed(2)}`;
+    if (total) {
+      const grouped = Cart.totals();
+      const output = Object.entries(grouped)
+        .map(([currency, amount]) => formatPrice(amount, currency))
+        .join(' + ');
+      total.textContent = output;
+    }
   }
 };
 
@@ -162,6 +230,19 @@ function renderMealCards(meals, containerId) {
     const tagHTML = meal.tag
       ? `<span style="position:absolute;top:14px;left:14px;background:var(--gold);color:var(--green-deep);font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:0.06em">${meal.tag}</span>`
       : '';
+    const regionLabel = meal.country ? `${meal.region} · ${meal.country}` : meal.region;
+    const nutritionHTML = meal.nutrition
+      ? `<div class="meal-nutrition">🔥 ${meal.nutrition.calories} kcal · P ${meal.nutrition.protein}g · C ${meal.nutrition.carbs}g · F ${meal.nutrition.fats}g</div>`
+      : '';
+    const ingredientHTML = Array.isArray(meal.ingredients) && meal.ingredients.length
+      ? `<div class="meal-ingredients"><strong>Ingredients:</strong> ${meal.ingredients.slice(0, 5).join(', ')}${meal.ingredients.length > 5 ? ', ...' : ''}</div>`
+      : '';
+    const healthTagsHTML = Array.isArray(meal.healthTags) && meal.healthTags.length
+      ? `<div class="meal-health-tags">${meal.healthTags.slice(0, 3).map(tag => `<span class="meal-health-tag">${tag}</span>`).join('')}</div>`
+      : '';
+    const ingredientNutritionHTML = Array.isArray(meal.ingredientNutrition) && meal.ingredientNutrition.length
+      ? `<div class="meal-ingredient-nutrition">${meal.ingredientNutrition[0]}</div>`
+      : '';
 
     return `
       <div class="meal-card" data-region="${meal.region}">
@@ -170,12 +251,16 @@ function renderMealCards(meals, containerId) {
           ${tagHTML}
         </div>
         <div class="meal-body">
-          <div class="meal-region">${meal.region}</div>
+          <div class="meal-region">${regionLabel}</div>
           <h3>${meal.name}</h3>
           <p>${meal.desc}</p>
+          ${nutritionHTML}
+          ${ingredientHTML}
+          ${ingredientNutritionHTML}
+          ${healthTagsHTML}
           <div class="meal-footer">
-            <span class="meal-price">$${meal.price.toFixed(2)}</span>
-            <button class="btn-add-cart" onclick='Cart.add(${JSON.stringify({ id: meal.id, name: meal.name, price: meal.price, emoji: meal.emoji })})'>
+            <span class="meal-price">${formatPrice(meal.price, meal.currency || 'USD')}</span>
+            <button class="btn-add-cart" onclick='Cart.add(${JSON.stringify({ id: meal.id, name: meal.name, price: meal.price, emoji: meal.emoji, currency: meal.currency || 'USD' })})'>
               Add to Cart
             </button>
           </div>
@@ -197,8 +282,8 @@ function renderIngredientCards(items, containerId) {
         <h3>${item.name}</h3>
         <p>${item.desc}</p>
         <div class="meal-footer">
-          <span class="meal-price">$${item.price.toFixed(2)}</span>
-          <button class="btn-add-cart" onclick='Cart.add(${JSON.stringify({ id: item.id, name: item.name, price: item.price, emoji: item.emoji })})'>
+          <span class="meal-price">${formatPrice(item.price, 'USD')}</span>
+          <button class="btn-add-cart" onclick='Cart.add(${JSON.stringify({ id: item.id, name: item.name, price: item.price, emoji: item.emoji, currency: 'USD' })})'>
             + Cart
           </button>
         </div>
