@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dine with Mee — African Food, Health & Nutrition</title>
-  <meta name="description" content="Africa's premier platform for authentic African meals, ingredients, chef connections, and telehealth nutrition. Eat well. Live well." />
+  <title>Dine with Mee - African Health and Nutrition Platform</title>
+  <meta name="description" content="Nutrition-driven African health platform for managing diabetes, hypertension, anemia, maternal health, and everyday healthy eating." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
   <a href="#home" class="nav-logo">
     <div class="logo-mark">D</div>
@@ -18,33 +17,16 @@
 
   <ul class="nav-links" id="nav-links">
     <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#health-goals">Health Goals</a></li>
+    <li><a href="#featured-health">Featured Meals</a></li>
+    <li><a href="#meal-plans">Meal Plans</a></li>
     <li><a href="#marketplace">Marketplace</a></li>
-    <li class="nav-dropdown">
-      <a href="#">Company</a>
-      <div class="dropdown-menu">
-        <a href="about.html">About Us</a>
-        <a href="mission.html">Our Mission</a>
-        <a href="vision.html">Our Vision</a>
-      </div>
-    </li>
-    <li><a href="chefs.html">Chefs</a></li>
-    <li class="nav-dropdown">
-      <a href="health.html">Health Hub</a>
-      <div class="dropdown-menu">
-        <a href="health.html">Health Hub Home</a>
-        <a href="diabetes.html">Diabetes</a>
-        <a href="hypertension.html">Hypertension</a>
-        <a href="obesity.html">Obesity</a>
-        <a href="sicklecell.html">Sickle Cell</a>
-        <a href="maternal.html">Maternal Health</a>
-      </div>
-    </li>
-    <li><a href="telenutrition.html">Telenutrition</a></li>
+    <li><a href="#telenutrition">Telenutrition</a></li>
   </ul>
 
   <div class="nav-actions">
     <button class="btn-cart" id="cart-btn">
-      🛒 Cart
+      Cart
       <span class="cart-count" id="cart-count-nav" style="display:none">0</span>
     </button>
     <a href="login.html" class="btn-login">Log in</a>
@@ -55,44 +37,37 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg-pattern"></div>
   <div class="hero-kente"></div>
+  <img id="hero-food-image" class="hero-food-image" alt="Featured healthy African meal" />
 
   <div class="hero-content">
-    <div class="hero-badge">🌍 Africa's Food & Wellness Platform</div>
+    <div class="hero-badge">Nutrition-Driven African Health Platform</div>
 
-    <h1>
-      Nourish Your Roots,
-      <em>Elevate Your Health</em>
-    </h1>
+    <h1>Eat for Your Health, Not Just Your Hunger</h1>
 
     <p class="hero-sub">
-      Discover authentic African meals, connect with master chefs, shop premium ingredients, and access certified nutritionists — all in one powerful platform.
+      Discover African meals designed to prevent and manage diabetes, hypertension, anemia, and support maternal health.
     </p>
 
     <div class="hero-ctas">
-      <a href="#marketplace" class="btn-primary" style="font-size:15px;padding:14px 32px;">Explore Marketplace</a>
-      <a href="health.html" class="btn-secondary" style="font-size:15px;padding:14px 32px;">Health Hub</a>
+      <a href="#health-goals" class="btn-primary" style="font-size:15px;padding:14px 32px;">Start Your Health Journey</a>
+      <a href="#marketplace" class="btn-secondary" style="font-size:15px;padding:14px 32px;">Browse Meals</a>
     </div>
 
     <div class="hero-stats">
       <div class="stat-item">
-        <span class="stat-num">500+</span>
-        <span class="stat-label">Authentic Meals</span>
+        <span class="stat-num">89+</span>
+        <span class="stat-label">Health-Coded Meals</span>
       </div>
       <div class="stat-item">
-        <span class="stat-num">120</span>
-        <span class="stat-label">Certified Chefs</span>
+        <span class="stat-num">5</span>
+        <span class="stat-label">African Regions</span>
       </div>
       <div class="stat-item">
-        <span class="stat-num">54</span>
-        <span class="stat-label">African Countries</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">40k+</span>
-        <span class="stat-label">Happy Customers</span>
+        <span class="stat-num">1</span>
+        <span class="stat-label">Unified Health Platform</span>
       </div>
     </div>
   </div>
@@ -103,77 +78,162 @@
   </div>
 </section>
 
-<!-- FEATURES STRIP -->
-<section class="features-strip">
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">🍽️</div>
-      <h4>African Meal Marketplace</h4>
-      <p>Order chef-cooked authentic meals from all five African regions, delivered fresh to your door.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🛒</div>
-      <h4>Ingredient Marketplace</h4>
-      <p>Source rare and traditional African spices, grains, and condiments for your kitchen.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">👨🏾‍🍳</div>
-      <h4>Chef Network</h4>
-      <p>Connect with 120+ verified African chefs for private dining, events, or cooking classes.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🩺</div>
-      <h4>Telenutrition</h4>
-      <p>Book one-on-one virtual sessions with certified African nutrition professionals.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">💚</div>
-      <h4>Health Hub</h4>
-      <p>Evidence-based guides on NCDs and maternal health with African nutrition-first approaches.</p>
-    </div>
+<section class="section health-goals-section" id="health-goals">
+  <div class="section-header">
+    <span class="section-tag">Goal-Based Nutrition</span>
+    <h2>What are you trying to improve?</h2>
+    <p>Choose a goal to dynamically surface meals based on existing health tags in your meal dataset.</p>
   </div>
+
+  <div class="goal-grid" id="goal-selector">
+    <button class="goal-card" data-goal="diabetes" type="button">
+      <span class="goal-icon" aria-hidden="true">&#128167;</span>
+      <span class="goal-kicker">Blood Sugar</span>
+      <h4>Manage Diabetes</h4>
+      <p>Prioritizes high-fiber and diabetes-friendly options.</p>
+    </button>
+    <button class="goal-card" data-goal="maternal" type="button">
+      <span class="goal-icon" aria-hidden="true">&#129328;</span>
+      <span class="goal-kicker">Maternal Care</span>
+      <h4>Support Pregnancy and Maternal Health</h4>
+      <p>Highlights iron-rich and pregnancy-supportive meals.</p>
+    </button>
+    <button class="goal-card" data-goal="hbp" type="button">
+      <span class="goal-icon" aria-hidden="true">&#10084;</span>
+      <span class="goal-kicker">Heart Wellness</span>
+      <h4>Reduce Blood Pressure</h4>
+      <p>Focuses on heart-healthy, nutrient-dense choices.</p>
+    </button>
+    <button class="goal-card" data-goal="weight" type="button">
+      <span class="goal-icon" aria-hidden="true">&#9878;</span>
+      <span class="goal-kicker">Body Goals</span>
+      <h4>Weight Loss and Obesity</h4>
+      <p>Surfaces lighter, low-carb and satiety-supportive meals.</p>
+    </button>
+    <button class="goal-card" data-goal="general" type="button">
+      <span class="goal-icon" aria-hidden="true">&#127793;</span>
+      <span class="goal-kicker">Daily Balance</span>
+      <h4>General Healthy Eating</h4>
+      <p>Balanced African nutrition for daily wellness.</p>
+    </button>
+  </div>
+
+  <p class="goal-tip">Tip: click an active card again to remove goal filtering.</p>
 </section>
 
-<!-- FEATURED MEALS -->
-<section class="section">
+<section class="section featured-health-section" id="featured-health">
   <div class="section-header">
-    <span class="section-tag">🌍 From Every Corner of Africa</span>
-    <h2>Featured Meals This Week</h2>
-    <p>Hand-picked by our chefs. Rooted in tradition. Perfected for your table.</p>
+    <span class="section-tag">Health-Scored Dishes</span>
+    <h2>Featured Health Meals</h2>
+    <p>Every card includes your meal image, price, tags, health score, and a nutrition-first benefit explanation.</p>
   </div>
 
   <div class="meals-grid" id="featured-meals"></div>
+  <p class="featured-goal-label" id="featured-goal-label">Showing top health meals across all goals.</p>
+</section>
 
-  <div style="text-align:center; margin-top:48px;">
-    <a href="#marketplace" class="btn-dark" style="padding:14px 40px;font-size:15px;">View Marketplace →</a>
+<section class="section meal-plans-section" id="meal-plans">
+  <div class="section-header">
+    <span class="section-tag">Structured Guidance</span>
+    <h2>Nutrition Plans Designed for You</h2>
+    <p>Science-backed African meal plan pathways built around real health outcomes.</p>
+  </div>
+
+  <div class="plan-grid">
+    <article class="plan-card">
+      <h3>Diabetes-Friendly African Meal Plan (7 days)</h3>
+      <p>Optimized for blood sugar stability with high-fiber, lower-glycemic African staples.</p>
+      <a class="btn-dark" href="#marketplace">View Plan</a>
+    </article>
+
+    <article class="plan-card">
+      <h3>Pregnancy Nutrition Plan</h3>
+      <p>Iron-rich, protein-balanced meal recommendations to support maternal and fetal health.</p>
+      <a class="btn-dark" href="#marketplace">View Plan</a>
+    </article>
+
+    <article class="plan-card">
+      <h3>Heart-Healthy Plan</h3>
+      <p>Prioritizes meals that support blood pressure and cardiovascular wellness.</p>
+      <a class="btn-dark" href="#marketplace">View Plan</a>
+    </article>
+
+    <article class="plan-card">
+      <h3>Weight Loss Plan</h3>
+      <p>Calorie-aware and protein-supportive selections for long-term, sustainable fat loss.</p>
+      <a class="btn-dark" href="#marketplace">View Plan</a>
+    </article>
   </div>
 </section>
 
-<!-- MARKETPLACE HERO -->
+<section class="section tele-section" id="telenutrition">
+  <div class="tele-card">
+    <div class="tele-copy">
+      <span class="section-tag">Virtual Nutrition Care</span>
+      <h2>Talk to a Nutrition Expert</h2>
+      <p>
+        Get personalized guidance from certified nutrition professionals who understand African foods,
+        chronic disease prevention, and maternal nutrition needs.
+      </p>
+    </div>
+    <a href="telenutrition.html" class="btn-primary" style="padding:14px 30px;font-size:15px;">Book Consultation</a>
+  </div>
+</section>
+
+<section class="section why-section" id="why-dine-with-mee">
+  <div class="section-header">
+    <span class="section-tag">Platform Positioning</span>
+    <h2>Why Dine with Mee?</h2>
+    <p>This is not just food ordering. It is an African nutrition intelligence platform for better health.</p>
+  </div>
+
+  <div class="why-grid">
+    <article class="why-card">
+      <h4>African food as medicine</h4>
+      <p>We transform culturally familiar meals into practical daily health interventions.</p>
+    </article>
+    <article class="why-card">
+      <h4>Built for NCD prevention</h4>
+      <p>Meal discovery is aligned with diabetes, hypertension, obesity, and anemia risk reduction.</p>
+    </article>
+    <article class="why-card">
+      <h4>Maternal nutrition focus</h4>
+      <p>We surface nutrient-dense meal options suitable for preconception and pregnancy stages.</p>
+    </article>
+    <article class="why-card">
+      <h4>Multi-country African meals</h4>
+      <p>From West to East, South, Central and North Africa, your nutrition options stay diverse.</p>
+    </article>
+    <article class="why-card">
+      <h4>Nutrition and technology combined</h4>
+      <p>Tags, health scores, dynamic filtering, and telenutrition make decision-making easier.</p>
+    </article>
+  </div>
+</section>
+
 <section class="page-hero" id="marketplace">
   <div class="page-hero-content">
     <div class="breadcrumb"><a href="#home">Home</a> › Marketplace</div>
-    <h1>African Marketplace 🌍</h1>
-    <p>Authentic meals and premium ingredients from all five regions of Africa. Every item includes a full nutrition guide.</p>
+    <h1>African Marketplace by Region</h1>
+    <p>Keep exploring meals and ingredients across West, East, Southern, Central, and North Africa.</p>
   </div>
 </section>
 
-<!-- MARKETPLACE CONTENT -->
 <section class="section">
   <div class="marketplace-tabs">
-    <button class="tab-btn active" id="tab-meals" onclick="switchTab('meals')">🍽️ African Meals</button>
-    <button class="tab-btn" id="tab-ingredients" onclick="switchTab('ingredients')">🛒 Ingredients</button>
+    <button class="tab-btn active" id="tab-meals" onclick="switchTab('meals')">African Meals</button>
+    <button class="tab-btn" id="tab-ingredients" onclick="switchTab('ingredients')">Ingredients</button>
   </div>
 
   <div id="panel-meals">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:20px;">
       <div class="region-filter" id="region-filter">
         <button class="region-btn active" onclick="filterRegion('All', this)">All Regions</button>
-        <button class="region-btn" onclick="filterRegion('West Africa', this)">🌍 West Africa</button>
-        <button class="region-btn" onclick="filterRegion('East Africa', this)">🌿 East Africa</button>
-        <button class="region-btn" onclick="filterRegion('Central Africa', this)">🌳 Central Africa</button>
-        <button class="region-btn" onclick="filterRegion('Southern Africa', this)">🦁 Southern Africa</button>
-        <button class="region-btn" onclick="filterRegion('North Africa', this)">🏺 North Africa</button>
+        <button class="region-btn" onclick="filterRegion('West Africa', this)">West Africa</button>
+        <button class="region-btn" onclick="filterRegion('East Africa', this)">East Africa</button>
+        <button class="region-btn" onclick="filterRegion('Central Africa', this)">Central Africa</button>
+        <button class="region-btn" onclick="filterRegion('Southern Africa', this)">Southern Africa</button>
+        <button class="region-btn" onclick="filterRegion('North Africa', this)">North Africa</button>
       </div>
       <div style="font-size:13px;color:var(--text-light);" id="meal-count"></div>
     </div>
@@ -234,161 +294,46 @@
   <div id="panel-ingredients" style="display:none;">
     <div class="region-filter" id="ingredient-region-filter">
       <button class="region-btn active" onclick="filterIngredients('All', this)">All Regions</button>
-      <button class="region-btn" onclick="filterIngredients('West Africa', this)">🌍 West Africa</button>
-      <button class="region-btn" onclick="filterIngredients('East Africa', this)">🌿 East Africa</button>
-      <button class="region-btn" onclick="filterIngredients('Central Africa', this)">🌳 Central Africa</button>
-      <button class="region-btn" onclick="filterIngredients('Southern Africa', this)">🦁 Southern Africa</button>
-      <button class="region-btn" onclick="filterIngredients('North Africa', this)">🏺 North Africa</button>
+      <button class="region-btn" onclick="filterIngredients('West Africa', this)">West Africa</button>
+      <button class="region-btn" onclick="filterIngredients('East Africa', this)">East Africa</button>
+      <button class="region-btn" onclick="filterIngredients('Central Africa', this)">Central Africa</button>
+      <button class="region-btn" onclick="filterIngredients('Southern Africa', this)">Southern Africa</button>
+      <button class="region-btn" onclick="filterIngredients('North Africa', this)">North Africa</button>
     </div>
     <div class="meals-grid" id="marketplace-ingredients"></div>
   </div>
 </section>
 
-<!-- INTRO -->
-<section class="section" style="background: var(--off-white);">
-  <div class="intro-split">
-    <div class="intro-visual">
-      <div class="intro-img-main">🫕</div>
-      <div class="intro-img-badge">
-        <div class="num">98%</div>
-        <div class="lbl">Customer Satisfaction</div>
-      </div>
-    </div>
-    <div class="intro-text">
-      <span class="section-tag">Why Dine with Mee</span>
-      <h2>African Food is Medicine. We Prove It Daily.</h2>
-      <p>
-        For centuries, African cuisine has been built on nutrient-dense, whole ingredients — moringa, millet, plantain, baobab, and more. Modern science is only catching up.
-      </p>
-      <p>
-        We bridge the gap between cultural food heritage and contemporary health science. Whether you're managing diabetes, navigating pregnancy, or simply reclaiming your roots — our platform supports every step.
-      </p>
-      <ul class="intro-list">
-        <li><span class="check">✓</span> Meals mapped to nutritional profiles and health conditions</li>
-        <li><span class="check">✓</span> Chef-cooked with verified ingredient sourcing</li>
-        <li><span class="check">✓</span> Certified nutritionists from across the continent</li>
-        <li><span class="check">✓</span> Health Hub built with clinical and cultural knowledge</li>
-      </ul>
-      <a href="about.html" class="btn-dark">Learn Our Story →</a>
-    </div>
-  </div>
-</section>
-
-<!-- HEALTH HUB PREVIEW -->
-<section class="section health-strip">
-  <div class="section-header">
-    <span class="section-tag">💚 Your Wellness Centre</span>
-    <h2>Explore the Health Hub</h2>
-    <p>Practical, culturally-informed guidance on managing your health through food.</p>
-  </div>
-
-  <div class="health-cards">
-    <a href="diabetes.html" class="health-card" style="text-decoration:none;">
-      <div class="icon">🩸</div>
-      <h4>Diabetes</h4>
-      <p>Manage blood sugar with traditional African foods — fonio, bitter leaf, and more.</p>
-      <div class="link-arrow">Explore Guide →</div>
-    </a>
-    <a href="hypertension.html" class="health-card" style="text-decoration:none;">
-      <div class="icon">❤️</div>
-      <h4>Hypertension</h4>
-      <p>Low-sodium, high-potassium African diets that naturally support healthy blood pressure.</p>
-      <div class="link-arrow">Explore Guide →</div>
-    </a>
-    <a href="obesity.html" class="health-card" style="text-decoration:none;">
-      <div class="icon">⚖️</div>
-      <h4>Obesity & Weight</h4>
-      <p>Satiety-rich traditional meals and lifestyle practices from African culture.</p>
-      <div class="link-arrow">Explore Guide →</div>
-    </a>
-    <a href="sicklecell.html" class="health-card" style="text-decoration:none;">
-      <div class="icon">🔴</div>
-      <h4>Sickle Cell Disease</h4>
-      <p>Nutrition strategies that reduce crisis frequency and support red blood cell health.</p>
-      <div class="link-arrow">Explore Guide →</div>
-    </a>
-    <a href="maternal.html" class="health-card" style="text-decoration:none;">
-      <div class="icon">🤰🏾</div>
-      <h4>Maternal Health</h4>
-      <p>Trimester-by-trimester nutrition and care rooted in African food wisdom.</p>
-      <div class="link-arrow">Explore Guide →</div>
-    </a>
-    <a href="health.html" class="health-card" style="text-decoration:none; background: var(--green-deep);">
-      <div class="icon">🌿</div>
-      <h4 style="color:var(--white);">Full Health Hub</h4>
-      <p style="color:rgba(255,255,255,0.65);">Browse all conditions, guides, and nutrition resources in one place.</p>
-      <div class="link-arrow" style="color:var(--gold-light);">Visit Health Hub →</div>
-    </a>
-  </div>
-</section>
-
-<!-- CHEF PREVIEW -->
-<section class="section">
-  <div class="section-header">
-    <span class="section-tag">👨🏾‍🍳 Our Chef Network</span>
-    <h2>Meet the Masters Behind the Meals</h2>
-    <p>120+ verified African chefs bringing authentic flavours from every region.</p>
-  </div>
-
-  <div class="chefs-preview" id="chef-preview"></div>
-
-  <div style="text-align:center; margin-top:48px;">
-    <a href="chefs.html" class="btn-dark" style="padding:14px 40px;font-size:15px;">Meet All Chefs →</a>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="section testimonials">
-  <div class="section-header">
-    <span class="section-tag">💬 Real Stories</span>
-    <h2>What Our Community Says</h2>
-    <p>From the diaspora to the continent — people are reconnecting with African food and health.</p>
-  </div>
-
-  <div class="testimonials-grid" id="testimonials-grid"></div>
-</section>
-
-<!-- CTA BANNER -->
-<section class="cta-banner">
-  <h2>Ready to Start Your African Food Journey?</h2>
-  <p>Join 40,000+ customers discovering authentic meals, better health, and cultural connection.</p>
-  <div class="cta-buttons">
-    <a href="signup.html" class="btn-dark" style="padding:14px 40px;font-size:15px;">Create Free Account</a>
-    <a href="telenutrition.html" class="btn-primary" style="padding:14px 40px;font-size:15px;">Book Nutrition Session</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
       <span class="logo-text">Dine with <span>Mee</span></span>
-      <p>Africa's premier food, nutrition, and wellness platform. Connecting culture, cuisine, and health for a thriving continent and diaspora.</p>
+      <p>Nutrition-driven African health platform that combines food culture, digital care, and preventive health outcomes.</p>
       <div class="social-links">
-        <a href="#">𝕏</a>
+        <a href="#">X</a>
         <a href="#">in</a>
-        <a href="#">📘</a>
-        <a href="#">📸</a>
+        <a href="#">F</a>
+        <a href="#">IG</a>
       </div>
     </div>
 
     <div class="footer-col">
       <h5>Platform</h5>
       <ul>
-        <li><a href="#marketplace">Meal Marketplace</a></li>
-        <li><a href="#marketplace">Ingredient Shop</a></li>
-        <li><a href="chefs.html">Chef Network</a></li>
-        <li><a href="telenutrition.html">Telenutrition</a></li>
+        <li><a href="#featured-health">Featured Meals</a></li>
+        <li><a href="#meal-plans">Nutrition Plans</a></li>
+        <li><a href="#marketplace">Marketplace</a></li>
+        <li><a href="#telenutrition">Telenutrition</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h5>Health Hub</h5>
+      <h5>Health Focus</h5>
       <ul>
-        <li><a href="health.html">Overview</a></li>
-        <li><a href="diabetes.html">Diabetes</a></li>
-        <li><a href="hypertension.html">Hypertension</a></li>
-        <li><a href="maternal.html">Maternal Health</a></li>
+        <li><a href="#health-goals">Manage Diabetes</a></li>
+        <li><a href="#health-goals">Maternal Health</a></li>
+        <li><a href="#health-goals">Reduce Blood Pressure</a></li>
+        <li><a href="#health-goals">Weight Management</a></li>
       </ul>
     </div>
 
@@ -398,27 +343,26 @@
         <li><a href="about.html">About Us</a></li>
         <li><a href="mission.html">Our Mission</a></li>
         <li><a href="vision.html">Our Vision</a></li>
-        <li><a href="signup.html">Join the Team</a></li>
+        <li><a href="signup.html">Join Free</a></li>
       </ul>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <span>© 2025 Dine with Mee. Made with 💚 for Africa.</span>
+    <span>© 2026 Dine with Mee. Nutrition-first African wellness platform.</span>
     <span>Built by <span class="gold">Mee Technologies Ltd.</span></span>
   </div>
 </footer>
 
-<!-- CART SIDEBAR -->
 <div class="cart-overlay" id="cart-overlay"></div>
 <div class="cart-sidebar" id="cart-sidebar">
   <div class="cart-header">
-    <h3>🛒 Your Cart</h3>
-    <button class="cart-close" id="cart-close">✕</button>
+    <h3>Your Cart</h3>
+    <button class="cart-close" id="cart-close">X</button>
   </div>
   <div class="cart-items" id="cart-items">
     <div class="cart-empty">
-      <span class="emoji">🍽️</span>
+      <span class="emoji">Meal</span>
       Your cart is empty.<br />Explore our marketplace!
     </div>
   </div>
@@ -427,10 +371,10 @@
       <span>Total</span>
       <span class="amount" id="cart-total-amount">$0.00</span>
     </div>
-    <button class="btn-primary btn-full" onclick="showToast('Checkout coming soon! 🚀')">Checkout</button>
+    <button class="btn-primary btn-full" onclick="showToast('Checkout coming soon')">Checkout</button>
   </div>
 </div>
 
-<script src="app.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
