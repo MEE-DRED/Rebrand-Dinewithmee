@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Hub | Dine with Mee</title>
+  <meta name="description" content="Learn nutrition guidance for sickle cell, hypertension, diabetes, and obesity with meal links from Dine with Mee." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html#home" class="nav-logo">
+    <div class="logo-mark">D</div>
+    <span class="logo-text">Dine with <span>Mee</span></span>
+  </a>
+
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="health.html" class="active">Health Hub</a></li>
+    <li><a href="maternal.html">Maternal Care</a></li>
+    <li><a href="index.html#meal-plans">Meal Plans</a></li>
+    <li><a href="index.html#marketplace">Marketplace</a></li>
+    <li><a href="index.html#telenutrition">Telenutrition</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="btn-cart" id="cart-btn">
+      Cart
+      <span class="cart-count" id="cart-count-nav" style="display:none">0</span>
+    </button>
+    <a href="login.html" class="btn-login">Log in</a>
+    <a href="signup.html" class="btn-primary">Join Free</a>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<section class="page-hero" id="health-hub-home">
+  <div class="page-hero-content">
+    <div class="breadcrumb"><a href="index.html#home">Home</a> > Health Hub</div>
+    <h1>Health Hub</h1>
+    <p>Culturally grounded nutrition guidance for everyday prevention and chronic condition support.</p>
+  </div>
+</section>
+
+<section class="section" id="health-conditions">
+  <div class="section-header">
+    <span class="section-tag">Condition-Based Guidance</span>
+    <h2>Nutrition Support for Common Health Conditions</h2>
+    <p>Each guide includes what it is, potential complications, practical nutrition actions, and direct meal links.</p>
+  </div>
+
+  <div class="resource-grid">
+    <article class="resource-card" id="sickle-cell">
+      <h3>Sickle Cell</h3>
+
+      <div class="resource-block">
+        <h4>What it is</h4>
+        <p>Sickle cell disease is an inherited blood disorder where red blood cells can become rigid and sickle-shaped, reducing oxygen flow.</p>
+      </div>
+
+      <div class="resource-block">
+        <h4>Complications</h4>
+        <ul class="resource-list">
+          <li>Pain episodes and fatigue</li>
+          <li>Higher risk of infection</li>
+          <li>Anemia and reduced oxygen delivery</li>
+        </ul>
+      </div>
+
+      <div class="resource-block">
+        <h4>Nutrition guidance</h4>
+        <ul class="resource-list">
+          <li>Prioritize folate-rich greens and legumes</li>
+          <li>Hydrate throughout the day</li>
+          <li>Support immunity with colorful vegetables and fruit</li>
+        </ul>
+      </div>
+
+      <div class="resource-link-row">
+        <a class="resource-link" href="index.html#marketplace">View iron-supportive meals</a>
+        <a class="resource-link" href="index.html#health-goals">Use health goals filter</a>
+      </div>
+    </article>
+
+    <article class="resource-card" id="hypertension">
+      <h3>Hypertension</h3>
+
+      <div class="resource-block">
+        <h4>What it is</h4>
+        <p>Hypertension means blood pressure stays elevated over time, increasing strain on blood vessels and the heart.</p>
+      </div>
+
+      <div class="resource-block">
+        <h4>Complications</h4>
+        <ul class="resource-list">
+          <li>Heart disease and stroke risk</li>
+          <li>Kidney stress</li>
+          <li>Long-term vascular damage</li>
+        </ul>
+      </div>
+
+      <div class="resource-block">
+        <h4>Nutrition guidance</h4>
+        <ul class="resource-list">
+          <li>Reduce salt-heavy processed foods</li>
+          <li>Emphasize potassium-rich vegetables and legumes</li>
+          <li>Choose grilled, steamed, or lightly sauteed meals</li>
+        </ul>
+      </div>
+
+      <div class="resource-link-row">
+        <a class="resource-link" href="index.html#marketplace">Explore heart-healthy meals</a>
+        <a class="resource-link" href="index.html#meal-plans">See heart health plans</a>
+      </div>
+    </article>
+
+    <article class="resource-card" id="diabetes">
+      <h3>Diabetes</h3>
+
+      <div class="resource-block">
+        <h4>What it is</h4>
+        <p>Diabetes affects blood sugar regulation and requires consistent nutrition patterns for better glycemic control.</p>
+      </div>
+
+      <div class="resource-block">
+        <h4>Complications</h4>
+        <ul class="resource-list">
+          <li>Nerve and eye complications</li>
+          <li>Kidney strain over time</li>
+          <li>Greater cardiovascular risk</li>
+        </ul>
+      </div>
+
+      <div class="resource-block">
+        <h4>Nutrition guidance</h4>
+        <ul class="resource-list">
+          <li>Prioritize high-fiber and low-glycemic meals</li>
+          <li>Pair carbohydrates with protein sources</li>
+          <li>Keep portions steady across the day</li>
+        </ul>
+      </div>
+
+      <div class="resource-link-row">
+        <a class="resource-link" href="index.html#marketplace">Find diabetes-friendly meals</a>
+        <a class="resource-link" href="index.html#health-goals">Select diabetes goal</a>
+      </div>
+    </article>
+
+    <article class="resource-card" id="obesity">
+      <h3>Obesity</h3>
+
+      <div class="resource-block">
+        <h4>What it is</h4>
+        <p>Obesity is excess body fat that can raise the risk of chronic disease and metabolic dysfunction.</p>
+      </div>
+
+      <div class="resource-block">
+        <h4>Complications</h4>
+        <ul class="resource-list">
+          <li>Insulin resistance and type 2 diabetes risk</li>
+          <li>Joint stress and mobility limits</li>
+          <li>Higher blood pressure and lipid imbalance</li>
+        </ul>
+      </div>
+
+      <div class="resource-block">
+        <h4>Nutrition guidance</h4>
+        <ul class="resource-list">
+          <li>Build meals around vegetables, fiber, and protein</li>
+          <li>Limit sugar-dense beverages and snacks</li>
+          <li>Use consistent meal timing and hydration</li>
+        </ul>
+      </div>
+
+      <div class="resource-link-row">
+        <a class="resource-link" href="index.html#marketplace">Browse weight-supportive meals</a>
+        <a class="resource-link" href="index.html#meal-plans">Open weight plan cards</a>
+      </div>
+    </article>
+  </div>
+
+  <p class="resource-note">Medical nutrition should be personalized. Use this guidance as education and pair with clinician advice where needed.</p>
+</section>
+
+<section class="section why-section">
+  <div class="section-header">
+    <span class="section-tag">African Food as Medicine</span>
+    <h2>Culture and Nutrition Can Work Together</h2>
+    <p>African staples like legumes, leafy greens, whole grains, and traditional spices can support prevention, recovery, and long-term health resilience.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo-text">Dine with <span>Mee</span></span>
+      <p>Nutrition-driven African health platform that combines food culture, digital care, and preventive health outcomes.</p>
+      <div class="social-links">
+        <a href="#">X</a>
+        <a href="#">in</a>
+        <a href="#">F</a>
+        <a href="#">IG</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h5>Platform</h5>
+      <ul>
+        <li><a href="index.html#featured-health">Featured Meals</a></li>
+        <li><a href="index.html#meal-plans">Nutrition Plans</a></li>
+        <li><a href="index.html#marketplace">Marketplace</a></li>
+        <li><a href="index.html#telenutrition">Telenutrition</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Health Focus</h5>
+      <ul>
+        <li><a href="#diabetes">Diabetes</a></li>
+        <li><a href="#hypertension">Hypertension</a></li>
+        <li><a href="#sickle-cell">Sickle Cell</a></li>
+        <li><a href="#obesity">Obesity</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="mission.html">Our Mission</a></li>
+        <li><a href="vision.html">Our Vision</a></li>
+        <li><a href="signup.html">Join Free</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 Dine with Mee. Nutrition-first African wellness platform.</span>
+    <span>Built by <span class="gold">Mee Technologies Ltd.</span></span>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cart-overlay"></div>
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button class="cart-close" id="cart-close">X</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty">
+      <span class="emoji">Meal</span>
+      Your cart is empty.<br />Explore our marketplace!
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total</span>
+      <span class="amount" id="cart-total-amount">$0.00</span>
+    </div>
+    <button class="btn-primary btn-full" onclick="showToast('Checkout coming soon')">Checkout</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
