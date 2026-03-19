@@ -1806,7 +1806,60 @@ footer {
   .hero-ctas { flex-direction: column; max-width: 280px; }
   .form-card { padding: 32px 24px; }
   .meal-tools { grid-template-columns: 1fr; }
-  .meal-inputs { grid-template-columns: 1fr; }
+  .meal-inputs { grid-template-columns: 1fr; }  .wellness-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .program-image-wrapper {
+    height: 220px;
+  }
+  .program-meta {
+    gap: 8px;
+  }
+  .meta-tag,
+  .meta-sub {
+    font-size: 9px;
+    padding: 4px 10px;
+  }
+  .program-item h3 {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+  .nutrition-bar-label {
+    font-size: 8px;
+    margin-bottom: 8px;
+  }
+  .nutrition-bar {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .bar-label {
+    font-size: 10px;
+    min-width: 30px;
+  }
+  .macro-row {
+    gap: 10px;
+  }
+  .macro-item span {
+    font-size: 14px;
+  }
+  .macro-item small {
+    font-size: 9px;
+  }
+  .program-link {
+    font-size: 12px;
+  }
+  .program-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 30px 20px;
+  }
+  .stat-number {
+    font-size: 28px;
+  }
+  .stat-label {
+    font-size: 10px;
+  }
   .meal-nutrition-filters { grid-template-columns: 1fr; }
   .meal-extra-actions { justify-content: flex-start; }
   .favorites-section-head { flex-direction: column; align-items: flex-start; }
@@ -4386,6 +4439,59 @@ footer {
 
   .meal-inputs {
     grid-template-columns: 1fr;
+  }  .wellness-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .program-image-wrapper {
+    height: 220px;
+  }
+  .program-meta {
+    gap: 8px;
+  }
+  .meta-tag,
+  .meta-sub {
+    font-size: 9px;
+    padding: 4px 10px;
+  }
+  .program-item h3 {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+  .nutrition-bar-label {
+    font-size: 8px;
+    margin-bottom: 8px;
+  }
+  .nutrition-bar {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .bar-label {
+    font-size: 10px;
+    min-width: 30px;
+  }
+  .macro-row {
+    gap: 10px;
+  }
+  .macro-item span {
+    font-size: 14px;
+  }
+  .macro-item small {
+    font-size: 9px;
+  }
+  .program-link {
+    font-size: 12px;
+  }
+  .program-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 30px 20px;
+  }
+  .stat-number {
+    font-size: 28px;
+  }
+  .stat-label {
+    font-size: 10px;
   }
 
   .wellness-programs-grid {
@@ -4796,3 +4902,5 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+
