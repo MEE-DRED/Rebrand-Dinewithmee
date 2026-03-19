@@ -2431,11 +2431,16 @@ footer {
     radial-gradient(circle at 84% 8%, rgba(13,59,43,0.06) 0%, transparent 28%);
 }
 
+.featured-health-section .section-tag {
+  color: var(--green-deep);
+  font-weight: 800;
+}
+
 .featured-goal-label {
   margin-top: 22px;
   text-align: center;
   font-size: 13px;
-  color: var(--green-mid);
+  color: var(--green-deep);
   font-weight: 600;
   letter-spacing: 0.01em;
   padding: 11px 16px;
@@ -3799,7 +3804,7 @@ body {
 
 .featured-goal-label {
   margin-top: 18px;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--green-deep);
   text-align: center;
 }
 
