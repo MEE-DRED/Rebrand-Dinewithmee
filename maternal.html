@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maternal Nutrition | Dine with Mee</title>
-  <meta name="description" content="Trimester-by-trimester maternal nutrition guidance with iron, folate, protein focus and suggested meals." />
+  <title>Maternal Care | Dine with Mee</title>
+  <meta name="description" content="Trimester-based maternal nutrition guidance with meal recommendations and expert support pathways." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -16,115 +16,153 @@
   </a>
 
   <ul class="nav-links" id="nav-links">
-    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html">Home</a></li>
     <li><a href="health.html">Health Hub</a></li>
     <li><a href="maternal.html" class="active">Maternal Care</a></li>
-    <li><a href="index.html#meal-plans">Meal Plans</a></li>
-    <li><a href="index.html#marketplace">Marketplace</a></li>
-    <li><a href="index.html#telenutrition">Telenutrition</a></li>
+    <li><a href="marketplace.html">Marketplace</a></li>
+    <li><a href="research.html">Nutrition Research</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
 
   <div class="nav-actions">
-    <button class="btn-cart" id="cart-btn">
+    <button class="btn-cart" id="cart-btn" type="button">
       Cart
       <span class="cart-count" id="cart-count-nav" style="display:none">0</span>
     </button>
     <a href="login.html" class="btn-login">Log in</a>
     <a href="signup.html" class="btn-primary">Join Free</a>
-    <div class="hamburger" id="hamburger">
+    <button class="hamburger" id="hamburger" type="button" aria-label="Open menu">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </div>
 </nav>
 
 <section class="page-hero" id="maternal-home">
   <div class="page-hero-content">
-    <div class="breadcrumb"><a href="index.html#home">Home</a> > Maternal Nutrition</div>
-    <h1>Maternal Nutrition</h1>
-    <p>Trimester-based nourishment plans to support mother and baby with practical, culturally familiar meals.</p>
+    <div class="breadcrumb"><a href="index.html#home">Home</a> &#8250; Maternal Care</div>
+    <h1>Maternal Care Pathway</h1>
+    <p>Trimester-specific nutrition care designed to support both maternal health and healthy fetal development.</p>
   </div>
 </section>
 
-<section class="section">
+<section class="section maternal-timeline-section">
   <div class="section-header">
-    <span class="section-tag">Pregnancy Nutrition Roadmap</span>
-    <h2>Trimester-by-Trimester Nutrition Priorities</h2>
-    <p>Focus on iron, folate, protein, hydration, and steady energy with meals available in your marketplace.</p>
+    <span class="section-tag">Trimester Guidance</span>
+    <h2>Structured Maternal Nutrition by Stage</h2>
+    <p>Each trimester includes nutritional needs, food sources, practical guidance, and recommended meals.</p>
   </div>
 
   <div class="trimester-grid">
     <article class="trimester-card" id="trimester-1">
-      <h3>1st Trimester</h3>
-      <p>Build early nutrient reserves while managing nausea and appetite changes with lighter, protein-balanced options.</p>
+      <h3>First Trimester (Weeks 1-12)</h3>
 
-      <div class="trimester-needs">
-        <span>Folate</span>
-        <span>Iron</span>
-        <span>Protein</span>
+      <div class="trimester-block">
+        <h4>Nutritional needs</h4>
+        <ul class="resource-list">
+          <li>Folate for neural tube support</li>
+          <li>Iron for blood volume preparation</li>
+          <li>Protein to support early tissue formation</li>
+        </ul>
       </div>
 
-      <div class="resource-block">
-        <h4>Suggested meals from platform</h4>
+      <div class="trimester-block">
+        <h4>Food sources</h4>
+        <p>Leafy greens, beans, eggs, fish, fortified grains, avocado, and citrus-rich fruits.</p>
+      </div>
+
+      <div class="trimester-block">
+        <h4>Guidance</h4>
+        <p>Prioritize smaller, frequent meals to manage nausea and maintain energy stability through the day.</p>
+      </div>
+
+      <div class="trimester-block">
+        <h4>Recommended meals</h4>
         <div class="resource-link-row">
-          <a class="resource-link" href="index.html#marketplace">Moi Moi</a>
-          <a class="resource-link" href="index.html#marketplace">Efo Riro</a>
-          <a class="resource-link" href="index.html#marketplace">Molokhia</a>
+          <a class="resource-link" href="marketplace.html">Moi Moi</a>
+          <a class="resource-link" href="marketplace.html">Efo Riro</a>
+          <a class="resource-link" href="marketplace.html">Molokhia</a>
         </div>
       </div>
     </article>
 
     <article class="trimester-card" id="trimester-2">
-      <h3>2nd Trimester</h3>
-      <p>As growth accelerates, increase quality protein, iron-rich foods, and fiber-forward meals to support blood health and digestion.</p>
+      <h3>Second Trimester (Weeks 13-26)</h3>
 
-      <div class="trimester-needs">
-        <span>Iron</span>
-        <span>Protein</span>
-        <span>Fiber</span>
+      <div class="trimester-block">
+        <h4>Nutritional needs</h4>
+        <ul class="resource-list">
+          <li>Increased iron and protein for rapid growth</li>
+          <li>Calcium-supportive foods for bone development</li>
+          <li>Fiber for digestive comfort</li>
+        </ul>
       </div>
 
-      <div class="resource-block">
-        <h4>Suggested meals from platform</h4>
+      <div class="trimester-block">
+        <h4>Food sources</h4>
+        <p>Lean meats, legumes, milk or fortified alternatives, nuts, whole grains, and colorful vegetables.</p>
+      </div>
+
+      <div class="trimester-block">
+        <h4>Guidance</h4>
+        <p>Build balanced plates with protein, vegetables, and quality carbs while monitoring hydration and satiety.</p>
+      </div>
+
+      <div class="trimester-block">
+        <h4>Recommended meals</h4>
         <div class="resource-link-row">
-          <a class="resource-link" href="index.html#marketplace">Ndole</a>
-          <a class="resource-link" href="index.html#marketplace">Brochettes</a>
-          <a class="resource-link" href="index.html#marketplace">Afang Soup</a>
+          <a class="resource-link" href="marketplace.html">Ndole</a>
+          <a class="resource-link" href="marketplace.html">Brochettes</a>
+          <a class="resource-link" href="marketplace.html">Afang Soup</a>
         </div>
       </div>
     </article>
 
     <article class="trimester-card" id="trimester-3">
-      <h3>3rd Trimester</h3>
-      <p>Support final growth and maternal endurance with nutrient-dense meals, stable hydration, and regular high-protein intake.</p>
+      <h3>Third Trimester (Weeks 27-40)</h3>
 
-      <div class="trimester-needs">
-        <span>Protein</span>
-        <span>Iron</span>
-        <span>Calcium-supportive foods</span>
+      <div class="trimester-block">
+        <h4>Nutritional needs</h4>
+        <ul class="resource-list">
+          <li>Protein and iron to support late-stage growth</li>
+          <li>Energy-dense but nutrient-rich meal choices</li>
+          <li>Hydration and anti-inflammatory food support</li>
+        </ul>
       </div>
 
-      <div class="resource-block">
-        <h4>Suggested meals from platform</h4>
+      <div class="trimester-block">
+        <h4>Food sources</h4>
+        <p>Fish, poultry, legumes, whole grains, leafy greens, fruit, and omega-supportive oils and seeds.</p>
+      </div>
+
+      <div class="trimester-block">
+        <h4>Guidance</h4>
+        <p>Use digestible meals, avoid long fasting windows, and plan iron-rich combinations with vitamin C sources.</p>
+      </div>
+
+      <div class="trimester-block">
+        <h4>Recommended meals</h4>
         <div class="resource-link-row">
-          <a class="resource-link" href="index.html#marketplace">Injera and Doro Wat</a>
-          <a class="resource-link" href="index.html#marketplace">Tagine</a>
-          <a class="resource-link" href="index.html#marketplace">Isombe</a>
+          <a class="resource-link" href="marketplace.html">Injera and Doro Wat</a>
+          <a class="resource-link" href="marketplace.html">Tagine</a>
+          <a class="resource-link" href="marketplace.html">Isombe</a>
         </div>
       </div>
     </article>
   </div>
 
-  <p class="resource-note">If you have diabetes, hypertension, or anemia during pregnancy, combine this guide with your provider's personalized care plan.</p>
+  <div class="maternal-actions">
+    <a href="marketplace.html" class="btn-primary">Browse Pregnancy-Friendly Meals &#8594;</a>
+  </div>
 </section>
 
 <section class="section tele-section" id="maternal-consultation">
   <div class="tele-card">
     <div class="tele-copy">
-      <span class="section-tag">Specialist Support</span>
-      <h2>Speak with a Nutrition Expert</h2>
-      <p>Get one-on-one maternal meal guidance tailored to trimester goals, symptoms, and lab-based needs.</p>
+      <span class="section-tag">Specialist Care</span>
+      <h2>Speak to a Nutrition Expert</h2>
+      <p>Get personalized maternal nutrition coaching aligned with trimester needs, symptoms, lab values, and lifestyle realities.</p>
     </div>
-    <a href="index.html#telenutrition" class="btn-primary" style="padding:14px 30px;font-size:15px;">Book Consultation</a>
+    <a href="contact.html" class="btn-primary">Book Expert Session</a>
   </div>
 </section>
 
@@ -132,48 +170,48 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <span class="logo-text">Dine with <span>Mee</span></span>
-      <p>Nutrition-driven African health platform that combines food culture, digital care, and preventive health outcomes.</p>
+      <p>Clinical-grade nutrition guidance and African meal discovery in one unified platform.</p>
       <div class="social-links">
-        <a href="#">X</a>
-        <a href="#">in</a>
-        <a href="#">F</a>
-        <a href="#">IG</a>
+        <a href="#" aria-label="X">X</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="Facebook">F</a>
+        <a href="#" aria-label="Instagram">IG</a>
       </div>
+    </div>
+
+    <div class="footer-col">
+      <h5>Trimester Care</h5>
+      <ul>
+        <li><a href="#trimester-1">First Trimester</a></li>
+        <li><a href="#trimester-2">Second Trimester</a></li>
+        <li><a href="#trimester-3">Third Trimester</a></li>
+        <li><a href="contact.html">Expert Support</a></li>
+      </ul>
     </div>
 
     <div class="footer-col">
       <h5>Platform</h5>
       <ul>
-        <li><a href="index.html#featured-health">Featured Meals</a></li>
-        <li><a href="index.html#meal-plans">Nutrition Plans</a></li>
-        <li><a href="index.html#marketplace">Marketplace</a></li>
-        <li><a href="index.html#telenutrition">Telenutrition</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h5>Maternal Stages</h5>
-      <ul>
-        <li><a href="#trimester-1">1st Trimester</a></li>
-        <li><a href="#trimester-2">2nd Trimester</a></li>
-        <li><a href="#trimester-3">3rd Trimester</a></li>
+        <li><a href="marketplace.html">Marketplace</a></li>
         <li><a href="health.html">Health Hub</a></li>
+        <li><a href="research.html">Nutrition Research</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h5>Company</h5>
+      <h5>Account</h5>
       <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="mission.html">Our Mission</a></li>
-        <li><a href="vision.html">Our Vision</a></li>
+        <li><a href="login.html">Log in</a></li>
         <li><a href="signup.html">Join Free</a></li>
+        <li><a href="index.html#ready-to-heal">Start Journey</a></li>
+        <li><a href="marketplace.html">Order Meals</a></li>
       </ul>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <span>© 2026 Dine with Mee. Nutrition-first African wellness platform.</span>
+    <span>&copy; 2026 Dine with Mee. All rights reserved.</span>
     <span>Built by <span class="gold">Mee Technologies Ltd.</span></span>
   </div>
 </footer>
@@ -182,7 +220,7 @@
 <div class="cart-sidebar" id="cart-sidebar">
   <div class="cart-header">
     <h3>Your Cart</h3>
-    <button class="cart-close" id="cart-close">X</button>
+    <button class="cart-close" id="cart-close" type="button">X</button>
   </div>
   <div class="cart-items" id="cart-items">
     <div class="cart-empty">
@@ -193,9 +231,9 @@
   <div class="cart-footer">
     <div class="cart-total">
       <span>Total</span>
-      <span class="amount" id="cart-total-amount">$0.00</span>
+      <span class="amount" id="cart-total-amount">0 RWF</span>
     </div>
-    <button class="btn-primary btn-full" onclick="showToast('Checkout coming soon')">Checkout</button>
+    <button class="btn-primary btn-full" type="button" onclick="showToast('Checkout loading...')">Checkout</button>
   </div>
 </div>
 

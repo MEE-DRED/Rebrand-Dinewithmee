@@ -1725,9 +1725,257 @@ function initMarketplace() {
   renderIngredientCards(INGREDIENTS, 'marketplace-ingredients');
 }
 
+function initHeroSlider() {
+  const slider = document.querySelector('.hero-slider');
+  if (!slider) return;
+
+  const slides = Array.from(slider.querySelectorAll('.hero-slide'));
+  const dots = Array.from(slider.querySelectorAll('[data-hero-dot]'));
+  const prevBtn = slider.querySelector('[data-hero-prev]');
+  const nextBtn = slider.querySelector('[data-hero-next]');
+  if (!slides.length) return;
+
+  let currentIndex = 0;
+  let timerId = null;
+
+  const showSlide = index => {
+    currentIndex = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentIndex);
+    });
+
+    dots.forEach((dot, i) => {
+      const active = i === currentIndex;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  };
+
+  const startAutoplay = () => {
+    clearInterval(timerId);
+    timerId = setInterval(() => {
+      showSlide(currentIndex + 1);
+    }, 6000);
+  };
+
+  const stopAutoplay = () => {
+    clearInterval(timerId);
+    timerId = null;
+  };
+
+  prevBtn?.addEventListener('click', () => {
+    showSlide(currentIndex - 1);
+    startAutoplay();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    showSlide(currentIndex + 1);
+    startAutoplay();
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      showSlide(index);
+      startAutoplay();
+    });
+  });
+
+  slider.addEventListener('mouseenter', stopAutoplay);
+  slider.addEventListener('mouseleave', startAutoplay);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAutoplay();
+    } else {
+      startAutoplay();
+    }
+  });
+
+  showSlide(0);
+  startAutoplay();
+}
+
+function initRecoveryCarousel() {
+  const carousel = document.querySelector('[data-recovery-carousel]');
+  if (!carousel) return;
+
+  const slides = Array.from(carousel.querySelectorAll('.recovery-slide'));
+  const dots = Array.from(document.querySelectorAll('[data-recovery-dot]'));
+  const prevBtn = carousel.querySelector('[data-recovery-prev]');
+  const nextBtn = carousel.querySelector('[data-recovery-next]');
+  if (!slides.length) return;
+
+  let currentIndex = 0;
+  let timerId = null;
+
+  const showSlide = index => {
+    currentIndex = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentIndex);
+    });
+
+    dots.forEach((dot, i) => {
+      const active = i === currentIndex;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  };
+
+  const startAutoplay = () => {
+    clearInterval(timerId);
+    timerId = setInterval(() => {
+      showSlide(currentIndex + 1);
+    }, 7000);
+  };
+
+  const stopAutoplay = () => {
+    clearInterval(timerId);
+    timerId = null;
+  };
+
+  prevBtn?.addEventListener('click', () => {
+    showSlide(currentIndex - 1);
+    startAutoplay();
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    showSlide(currentIndex + 1);
+    startAutoplay();
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      showSlide(index);
+      startAutoplay();
+    });
+  });
+
+  carousel.addEventListener('mouseenter', stopAutoplay);
+  carousel.addEventListener('mouseleave', startAutoplay);
+
+  showSlide(0);
+  startAutoplay();
+}
+
+function initTractionCounters() {
+  const counters = Array.from(document.querySelectorAll('.counter-value[data-counter-target]'));
+  if (!counters.length) return;
+
+  const animateCounter = counter => {
+    const target = Number(counter.dataset.counterTarget || 0);
+    if (!Number.isFinite(target) || target <= 0) {
+      counter.textContent = '0';
+      return;
+    }
+
+    const duration = 1400;
+    const startTime = performance.now();
+
+    const update = now => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(target * eased);
+      counter.textContent = value.toLocaleString();
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    };
+
+    requestAnimationFrame(update);
+  };
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    counters.forEach(counter => {
+      const target = Number(counter.dataset.counterTarget || 0);
+      counter.textContent = Number.isFinite(target) ? target.toLocaleString() : '0';
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      animateCounter(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.35 });
+
+  counters.forEach(counter => {
+    counter.textContent = '0';
+    observer.observe(counter);
+  });
+}
+
+function initFaqAccordion() {
+  const faqItems = Array.from(document.querySelectorAll('.faq-item'));
+  if (!faqItems.length) return;
+
+  faqItems.forEach(item => {
+    const toggle = item.querySelector('[data-faq-toggle]');
+    const answer = item.querySelector('[data-faq-answer]');
+    if (!toggle || !answer) return;
+
+    answer.hidden = true;
+    answer.style.maxHeight = '0px';
+
+    toggle.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+
+      faqItems.forEach(otherItem => {
+        const otherToggle = otherItem.querySelector('[data-faq-toggle]');
+        const otherAnswer = otherItem.querySelector('[data-faq-answer]');
+        if (!otherToggle || !otherAnswer) return;
+
+        otherItem.classList.remove('open');
+        otherToggle.setAttribute('aria-expanded', 'false');
+        otherAnswer.style.maxHeight = '0px';
+        setTimeout(() => {
+          if (!otherItem.classList.contains('open')) {
+            otherAnswer.hidden = true;
+          }
+        }, 240);
+      });
+
+      if (isOpen) {
+        return;
+      }
+
+      item.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      answer.hidden = false;
+      requestAnimationFrame(() => {
+        answer.style.maxHeight = `${answer.scrollHeight}px`;
+      });
+    });
+  });
+}
+
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const requiredFields = Array.from(form.querySelectorAll('[required]'));
+    const hasEmptyField = requiredFields.some(field => !String(field.value || '').trim());
+
+    if (hasEmptyField) {
+      showToast('Please complete all required fields before sending.');
+      return;
+    }
+
+    showToast('Thank you. Our team will contact you shortly.');
+    form.reset();
+  });
+}
+
 // ── Scroll Animation ──────────────────────────
 function initScrollAnimation() {
-  const animatedElements = Array.from(document.querySelectorAll('.meal-card, .health-card, .chef-mini-card, .info-card, .feature-card, .goal-card, .plan-card, .why-card, .tele-card'));
+  const animatedElements = Array.from(document.querySelectorAll('.meal-card, .health-card, .chef-mini-card, .info-card, .feature-card, .goal-card, .plan-card, .program-card, .clinical-card, .traction-card, .why-card, .tele-card, .resource-card, .trimester-card, .article-card, .summary-card, .faq-item, .contact-info-card, .contact-form-card'));
   if (!animatedElements.length) return;
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -1774,7 +2022,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initHealthGoalSelector();
   initExpandableSections();
   initHomeSections();
+  initHeroSlider();
+  initRecoveryCarousel();
+  initTractionCounters();
   initMarketplace();
+  initFaqAccordion();
+  initContactForm();
   initLoginForm();
   initSignupForm();
   initBookingForm();
