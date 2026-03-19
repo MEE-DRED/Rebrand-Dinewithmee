@@ -2089,8 +2089,6 @@ footer {
   gap: 12px;
 }
 
-.micro-item {}
-
 .micro-header {
   display: flex;
   align-items: center;
@@ -4899,6 +4897,269 @@ footer {
   }
 
   .signup-progress {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============ CHEF PARTNER PAGE ============ */
+.chef-partner-hero {
+  background:
+    linear-gradient(120deg, rgba(13,59,43,0.9), rgba(20,90,62,0.82)),
+    url('https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+}
+
+.chef-partner-hero::before {
+  background: linear-gradient(120deg, rgba(13,59,43,0.55), rgba(201,151,58,0.12));
+}
+
+.chef-hero-actions {
+  margin-top: 22px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.chef-partner-intro {
+  background: linear-gradient(180deg, rgba(232,245,239,0.66) 0%, rgba(255,255,255,1) 100%);
+}
+
+.chef-partner-split {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 22px;
+}
+
+.chef-partner-card {
+  background: var(--white);
+  border: 1px solid rgba(13,59,43,0.12);
+  border-radius: var(--radius-md);
+  padding: 26px;
+  box-shadow: var(--shadow-sm);
+}
+
+.chef-partner-card h3 {
+  color: var(--green-deep);
+  margin-bottom: 16px;
+  font-size: 1.35rem;
+}
+
+.chef-checklist {
+  display: grid;
+  gap: 12px;
+}
+
+.chef-checklist li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--text-mid);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.chef-checklist li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green-light);
+}
+
+.chef-metrics-card {
+  background: linear-gradient(160deg, var(--green-deep), #0a2e21);
+  border-color: rgba(201,151,58,0.25);
+}
+
+.chef-metrics-card h3 {
+  color: var(--gold-light);
+}
+
+.chef-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.chef-metric {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(201,151,58,0.2);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+}
+
+.chef-metric strong {
+  display: block;
+  color: var(--gold-light);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  margin-bottom: 4px;
+}
+
+.chef-metric span {
+  color: rgba(255,255,255,0.8);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.chef-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.chef-benefit-card {
+  background: var(--white);
+  border: 1px solid rgba(13,59,43,0.1);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+}
+
+.chef-benefit-card h3 {
+  color: var(--green-deep);
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+}
+
+.chef-benefit-card p {
+  color: var(--text-mid);
+  font-size: 14px;
+}
+
+.chef-process-section {
+  background: linear-gradient(180deg, rgba(251,243,227,0.45) 0%, rgba(255,255,255,1) 100%);
+}
+
+.chef-process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.chef-step-card {
+  position: relative;
+  background: var(--white);
+  border: 1px solid rgba(13,59,43,0.12);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+}
+
+.chef-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(201,151,58,0.2);
+  color: var(--green-deep);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.chef-step-card h3 {
+  color: var(--green-deep);
+  margin-bottom: 6px;
+  font-size: 1.15rem;
+}
+
+.chef-step-card p {
+  color: var(--text-mid);
+  font-size: 14px;
+}
+
+.chef-application-grid {
+  align-items: stretch;
+}
+
+.chef-requirements-card {
+  background: linear-gradient(170deg, var(--green-deep), #0a2d20);
+}
+
+.chef-requirements-card h2,
+.chef-requirements-card p,
+.chef-requirements-card .chef-checklist li,
+.chef-requirements-card .chef-form-note,
+.chef-requirements-card .chef-form-note a {
+  color: rgba(255,255,255,0.9);
+}
+
+.chef-requirements-card .section-tag {
+  color: var(--gold-light);
+}
+
+.chef-form-card {
+  border: 1px solid rgba(13,59,43,0.12);
+}
+
+.chef-checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.chef-checkbox-chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--off-white);
+  border: 1px solid rgba(13,59,43,0.14);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.45;
+}
+
+.chef-checkbox-chip input {
+  margin-top: 3px;
+  accent-color: var(--green-mid);
+}
+
+.chef-consent .chef-checkbox-chip {
+  background: var(--green-pale);
+}
+
+.chef-form-note {
+  margin-top: 14px;
+  color: var(--text-mid);
+  font-size: 13px;
+}
+
+.contact-partner-cta {
+  margin: 20px 0 6px;
+}
+
+@media (max-width: 1100px) {
+  .chef-benefits-grid,
+  .chef-process-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .chef-partner-split {
+    grid-template-columns: 1fr;
+  }
+
+  .chef-metrics-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .chef-hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .chef-benefits-grid,
+  .chef-process-grid,
+  .chef-checkbox-grid,
+  .chef-metrics-grid {
     grid-template-columns: 1fr;
   }
 }

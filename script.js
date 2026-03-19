@@ -1973,6 +1973,33 @@ function initContactForm() {
   });
 }
 
+function initChefPartnerForm() {
+  const form = document.getElementById('chef-partner-form');
+  if (!form) return;
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const requiredFields = Array.from(form.querySelectorAll('[required]'));
+    const hasEmptyRequiredField = requiredFields.some(field => {
+      if (field.type === 'checkbox') {
+        return !field.checked;
+      }
+
+      return !String(field.value || '').trim();
+    });
+
+    const selectedCuisines = form.querySelectorAll('input[name="cuisines"]:checked');
+    if (hasEmptyRequiredField || selectedCuisines.length === 0) {
+      showToast('Please complete all required fields and select at least one cuisine style.');
+      return;
+    }
+
+    showToast('Application received. Our partnerships team will contact you within 48 hours.');
+    form.reset();
+  });
+}
+
 // ── Scroll Animation ──────────────────────────
 function initScrollAnimation() {
   const animatedElements = Array.from(document.querySelectorAll('.meal-card, .health-card, .chef-mini-card, .info-card, .feature-card, .goal-card, .plan-card, .program-card, .clinical-card, .traction-card, .why-card, .tele-card, .resource-card, .trimester-card, .article-card, .summary-card, .faq-item, .contact-info-card, .contact-form-card'));
@@ -2028,6 +2055,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMarketplace();
   initFaqAccordion();
   initContactForm();
+  initChefPartnerForm();
   initLoginForm();
   initSignupForm();
   initBookingForm();
