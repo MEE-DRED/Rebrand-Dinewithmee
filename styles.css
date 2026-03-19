@@ -3467,6 +3467,174 @@ body {
   background: var(--gold);
 }
 
+/* Clinical Focus Card Images */
+.clinical-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+  display: block;
+}
+
+.clinical-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Clinical Wellness Programs Section */
+.clinical-wellness-programs {
+  background: linear-gradient(135deg, rgba(14, 54, 43, 0.6), rgba(31, 94, 71, 0.4));
+}
+
+.wellness-programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.wellness-program-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.92));
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.wellness-program-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.program-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.program-card-content {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.program-tags {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.program-tag-primary {
+  display: inline-block;
+  background: linear-gradient(130deg, var(--gold), var(--gold-light));
+  color: var(--green-deep);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.program-tag-secondary {
+  display: inline-block;
+  background: rgba(14, 61, 46, 0.12);
+  color: var(--text-dark);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.wellness-program-card h3 {
+  color: var(--text-dark);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.nutrition-breakdown {
+  background: rgba(14, 61, 46, 0.08);
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.nutrition-label {
+  display: block;
+  color: var(--text-mid);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.nutrition-percentages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.nutrient-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.nutrient-item span {
+  color: var(--text-mid);
+  font-size: 12px;
+}
+
+.nutrient-item strong {
+  color: var(--text-dark);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.wellness-program-card .btn-secondary {
+  width: 100%;
+  text-align: center;
+  padding: 12px 16px;
+  margin-top: auto;
+}
+
+.wellness-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  text-align: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-item strong {
+  font-size: 32px;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.stat-item span {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
 .ready-cta {
   padding-top: 74px;
   padding-bottom: 74px;
@@ -4113,6 +4281,44 @@ footer {
   .recovery-control {
     display: none;
   }
+
+  .wellness-programs-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+  }
+
+  .program-card-content {
+    padding: 20px;
+  }
+
+  .wellness-program-card h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .nutrition-breakdown {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+
+  .nutrition-label {
+    font-size: 11px;
+    margin-bottom: 10px;
+  }
+
+  .nutrient-item strong {
+    font-size: 14px;
+  }
+
+  .wellness-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    padding: 28px;
+  }
+
+  .stat-item strong {
+    font-size: 26px;
+  }
 }
 
 @media (max-width: 760px) {
@@ -4180,6 +4386,76 @@ footer {
 
   .meal-inputs {
     grid-template-columns: 1fr;
+  }
+
+  .wellness-programs-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .program-card-image {
+    height: 160px;
+  }
+
+  .program-card-content {
+    padding: 16px;
+  }
+
+  .program-tags {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .program-tag-primary,
+  .program-tag-secondary {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+
+  .wellness-program-card h3 {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  .nutrition-breakdown {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  .nutrition-label {
+    font-size: 10px;
+    margin-bottom: 8px;
+  }
+
+  .nutrition-percentages {
+    gap: 8px;
+  }
+
+  .nutrient-item span {
+    font-size: 11px;
+  }
+
+  .nutrient-item strong {
+    font-size: 13px;
+  }
+
+  .wellness-program-card .btn-secondary {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .wellness-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .stat-item strong {
+    font-size: 22px;
+  }
+
+  .stat-item span {
+    font-size: 12px;
   }
 }
 
