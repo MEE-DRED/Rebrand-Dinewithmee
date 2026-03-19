@@ -3537,372 +3537,155 @@ body {
 
 /* Clinical Wellness Programs Section */
 .clinical-wellness-programs {
-  position: relative;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 12% 4%, rgba(212, 175, 55, 0.14), transparent 38%),
-    radial-gradient(circle at 88% 92%, rgba(31, 94, 71, 0.58), transparent 42%),
-    #082116;
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.16);
+  background: linear-gradient(135deg, rgba(14, 54, 43, 0.6), rgba(31, 94, 71, 0.4));
 }
 
-.clinical-wellness-programs::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(8, 33, 22, 0.44) 0%, rgba(8, 33, 22, 0.78) 100%);
-  pointer-events: none;
-}
-
-.clinical-wellness-programs > * {
-  position: relative;
-  z-index: 1;
-}
-
-.clinical-wellness-programs .section-header {
+.wellness-programs-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  column-gap: 26px;
-  row-gap: 10px;
-  align-items: end;
-  text-align: left;
-  max-width: 1120px;
-  margin: 0 auto 52px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
 }
 
-.clinical-wellness-programs .section-header > span,
-.clinical-wellness-programs .section-header > h2,
-.clinical-wellness-programs .section-header > p {
-  grid-column: 1;
-}
-
-.clinical-wellness-programs .section-tag {
-  color: rgba(231, 200, 92, 0.96);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-}
-
-.clinical-wellness-programs .section-header h2 {
-  color: var(--white);
-  font-size: clamp(2.2rem, 4vw, 3.7rem);
-  line-height: 1.06;
-  letter-spacing: -0.02em;
-  max-width: 16ch;
-  margin-bottom: 6px;
-}
-
-.clinical-wellness-programs .section-header p {
-  color: rgba(232, 242, 237, 0.82);
-  max-width: 64ch;
-  margin: 0;
-  font-size: 1.02rem;
-  line-height: 1.75;
-}
-
-.clinical-wellness-programs .section-header > .btn-secondary {
-  grid-column: 2;
-  justify-self: end;
-  align-self: center;
-  border: 1px solid rgba(212, 175, 55, 0.42);
-  background: transparent;
-  color: var(--gold-light);
-  padding: 11px 18px;
-  font-weight: 600;
-}
-
-.clinical-wellness-programs .section-header > .btn-secondary:hover {
-  background: rgba(212, 175, 55, 0.14);
-  border-color: rgba(212, 175, 55, 0.72);
-  color: #f4dc95;
-  transform: translateY(-1px);
-}
-
-.clinical-wellness-programs .wellness-programs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 22px;
-  max-width: 1120px;
-  margin: 0 auto 44px;
-}
-
-.clinical-wellness-programs .wellness-program-card {
-  background: rgba(15, 46, 33, 0.62);
-  border: 1px solid rgba(209, 175, 71, 0.18);
-  border-radius: 30px;
+.wellness-program-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.92));
+  border-radius: 20px;
   overflow: hidden;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.25);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
 }
 
-.clinical-wellness-programs .wellness-program-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(209, 175, 71, 0.42);
-  background: rgba(16, 50, 36, 0.78);
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.32);
+.wellness-program-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
 }
 
-.clinical-wellness-programs .program-card-image {
+.program-card-image {
   width: 100%;
-  height: 208px;
+  height: 200px;
   object-fit: cover;
   display: block;
 }
 
-.clinical-wellness-programs .program-card-content {
-  padding: 22px;
+.program-card-content {
+  padding: 28px;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-.clinical-wellness-programs .program-tags {
+.program-tags {
   display: flex;
-  gap: 10px;
-  margin-bottom: 14px;
+  gap: 12px;
+  margin-bottom: 16px;
   flex-wrap: wrap;
 }
 
-.clinical-wellness-programs .program-tag-primary {
+.program-tag-primary {
   display: inline-block;
-  background: rgba(212, 175, 55, 0.16);
-  border: 1px solid rgba(212, 175, 55, 0.48);
-  color: #f4da91;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  padding: 6px 12px;
-  border-radius: 999px;
-}
-
-.clinical-wellness-programs .program-tag-secondary {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: rgba(238, 245, 241, 0.85);
+  background: linear-gradient(130deg, var(--gold), var(--gold-light));
+  color: var(--green-deep);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
   padding: 6px 12px;
-  border-radius: 999px;
+  border-radius: 20px;
 }
 
-.clinical-wellness-programs .wellness-program-card h3 {
-  color: var(--white);
-  font-size: 19px;
+.program-tag-secondary {
+  display: inline-block;
+  background: rgba(14, 61, 46, 0.12);
+  color: var(--text-dark);
+  font-size: 11px;
   font-weight: 700;
-  margin-bottom: 18px;
+  letter-spacing: 0.06em;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.wellness-program-card h3 {
+  color: var(--text-dark);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
   line-height: 1.4;
 }
 
-.clinical-wellness-programs .nutrition-breakdown {
-  background: rgba(5, 22, 15, 0.46);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+.nutrition-breakdown {
+  background: rgba(14, 61, 46, 0.08);
   padding: 16px;
-  border-radius: 15px;
-  margin-bottom: 18px;
+  border-radius: 12px;
+  margin-bottom: 20px;
 }
 
-.clinical-wellness-programs .nutrition-label {
+.nutrition-label {
   display: block;
-  color: rgba(231, 200, 92, 0.88);
+  color: var(--text-mid);
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   margin-bottom: 12px;
 }
 
-.clinical-wellness-programs .nutrition-percentages {
+.nutrition-percentages {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 
-.clinical-wellness-programs .nutrient-item {
+.nutrient-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
 }
 
-.clinical-wellness-programs .nutrient-item span {
-  color: rgba(235, 245, 240, 0.72);
+.nutrient-item span {
+  color: var(--text-mid);
   font-size: 12px;
 }
 
-.clinical-wellness-programs .nutrient-item strong {
-  color: #f8fcfa;
+.nutrient-item strong {
+  color: var(--text-dark);
   font-size: 16px;
   font-weight: 700;
 }
 
-.clinical-wellness-programs .wellness-program-card .btn-secondary {
-  width: fit-content;
-  min-width: 138px;
+.wellness-program-card .btn-secondary {
+  width: 100%;
   text-align: center;
-  padding: 10px 16px;
+  padding: 12px 16px;
   margin-top: auto;
-  border: 1px solid rgba(212, 175, 55, 0.34);
-  background: rgba(212, 175, 55, 0.08);
-  color: #f0d17c;
 }
 
-.clinical-wellness-programs .wellness-program-card .btn-secondary:hover {
-  background: rgba(212, 175, 55, 0.2);
-  border-color: rgba(212, 175, 55, 0.76);
-  color: #fff3c4;
-}
-
-.clinical-wellness-programs .wellness-stats {
+.wellness-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 24px;
   text-align: center;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 34px 30px;
-  background: rgba(12, 39, 28, 0.72);
-  border-radius: 28px;
-  border: 1px solid rgba(212, 175, 55, 0.22);
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-.clinical-wellness-programs .stat-item {
+.stat-item {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.clinical-wellness-programs .stat-item strong {
+.stat-item strong {
   font-size: 32px;
-  color: #f0cb70;
+  color: var(--gold);
   font-weight: 700;
 }
 
-.clinical-wellness-programs .stat-item span {
-  color: rgba(235, 244, 240, 0.72);
-  font-size: 13px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-@media (max-width: 980px) {
-  .clinical-wellness-programs .section-header {
-    grid-template-columns: 1fr;
-    row-gap: 10px;
-    margin-bottom: 38px;
-  }
-
-  .clinical-wellness-programs .section-header > .btn-secondary {
-    grid-column: 1;
-    justify-self: start;
-  }
-
-  .clinical-wellness-programs .wellness-programs-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 18px;
-  }
-
-  .clinical-wellness-programs .program-card-content {
-    padding: 20px;
-  }
-
-  .clinical-wellness-programs .wellness-program-card h3 {
-    font-size: 17px;
-    margin-bottom: 16px;
-  }
-
-  .clinical-wellness-programs .wellness-stats {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 28px 22px;
-    gap: 18px;
-  }
-
-  .clinical-wellness-programs .stat-item strong {
-    font-size: 26px;
-  }
-}
-
-@media (max-width: 760px) {
-  .clinical-wellness-programs .section-header h2 {
-    font-size: clamp(1.8rem, 8vw, 2.45rem);
-  }
-
-  .clinical-wellness-programs .section-header p {
-    font-size: 0.95rem;
-  }
-
-  .clinical-wellness-programs .wellness-programs-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .clinical-wellness-programs .program-card-image {
-    height: 170px;
-  }
-
-  .clinical-wellness-programs .program-card-content {
-    padding: 16px;
-  }
-
-  .clinical-wellness-programs .program-tags {
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-
-  .clinical-wellness-programs .program-tag-primary,
-  .clinical-wellness-programs .program-tag-secondary {
-    font-size: 10px;
-    padding: 5px 10px;
-  }
-
-  .clinical-wellness-programs .wellness-program-card h3 {
-    font-size: 15px;
-    margin-bottom: 12px;
-  }
-
-  .clinical-wellness-programs .nutrition-breakdown {
-    padding: 10px;
-    margin-bottom: 12px;
-  }
-
-  .clinical-wellness-programs .nutrition-label {
-    font-size: 10px;
-    margin-bottom: 8px;
-  }
-
-  .clinical-wellness-programs .nutrition-percentages {
-    gap: 8px;
-  }
-
-  .clinical-wellness-programs .nutrient-item span {
-    font-size: 11px;
-  }
-
-  .clinical-wellness-programs .nutrient-item strong {
-    font-size: 13px;
-  }
-
-  .clinical-wellness-programs .wellness-program-card .btn-secondary {
-    width: 100%;
-  }
-
-  .clinical-wellness-programs .wellness-stats {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    padding: 20px;
-  }
-
-  .clinical-wellness-programs .stat-item strong {
-    font-size: 22px;
-  }
-
-  .clinical-wellness-programs .stat-item span {
-    font-size: 11px;
-    letter-spacing: 0.03em;
-  }
+.stat-item span {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
 }
 
 .ready-cta {
