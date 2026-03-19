@@ -3451,8 +3451,8 @@ body {
   inset: 0;
   border-radius: 24px;
   border: 1px solid rgba(212, 175, 55, 0.28);
-  background: linear-gradient(165deg, rgba(255, 255, 255, 0.97), rgba(239, 245, 241, 0.95));
-  color: var(--text-dark);
+  background: linear-gradient(165deg, rgba(8, 40, 31, 0.9), rgba(11, 61, 46, 0.82));
+  color: var(--white);
   padding: 30px 26px;
   box-shadow: var(--shadow-sm);
   opacity: 0;
@@ -3471,17 +3471,17 @@ body {
   font-size: 1.12rem;
   line-height: 1.75;
   margin-bottom: 18px;
-  color: var(--text-mid);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .recovery-slide h4 {
-  color: var(--green-deep);
+  color: var(--gold-light);
   font-size: 1.1rem;
   margin-bottom: 4px;
 }
 
 .recovery-slide span {
-  color: var(--text-light);
+  color: rgba(255, 255, 255, 0.74);
   font-size: 0.85rem;
   letter-spacing: 0.04em;
 }
